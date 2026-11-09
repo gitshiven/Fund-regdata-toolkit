@@ -1,0 +1,420 @@
+{
+  "template": "EMT",
+  "version": "4.1-illustrative",
+  "title": "European MiFID Template",
+  "key_field": "00010_Financial_Instrument_Identifier",
+  "description": "Illustrative reconstruction of the European MiFID Template, the file a manufacturer sends to distributors carrying the target market assessment and ex-ante costs required by MiFID II. Semantics follow Directive 2014/65/EU Arts. 16(3) and 24(2), Delegated Directive (EU) 2017/593, Delegated Regulation (EU) 2017/565 Art. 50, and the ESMA product governance guidelines (ESMA35-43-620). It is a teaching subset, not the official FinDatEx catalogue.",
+  "fields": [
+    {
+      "code": "00010_Financial_Instrument_Identifier",
+      "name": "Share class ISIN",
+      "datatype": "isin",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00020_Financial_Instrument_Name",
+      "name": "Share class name",
+      "datatype": "string",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00030_Reporting_Date",
+      "name": "Reporting reference date",
+      "datatype": "date",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00040_Manufacturer_LEI",
+      "name": "Manufacturer legal entity identifier",
+      "datatype": "lei",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00050_Financial_Instrument_Currency",
+      "name": "Share class currency",
+      "datatype": "currency",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "02010_Investor_Type_Retail",
+      "name": "Target market includes retail clients",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: investor type",
+      "reference": "ESMA35-43-620 para. 18"
+    },
+    {
+      "code": "02020_Investor_Type_Professional",
+      "name": "Target market includes professional clients",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: investor type"
+    },
+    {
+      "code": "02030_Investor_Type_Eligible_Counterparty",
+      "name": "Target market includes eligible counterparties",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: investor type"
+    },
+    {
+      "code": "03010_Knowledge_Basic",
+      "name": "Suitable for investors with basic knowledge and experience",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: knowledge and experience",
+      "reference": "ESMA35-43-620 para. 18(b)"
+    },
+    {
+      "code": "03020_Knowledge_Informed",
+      "name": "Suitable for informed investors",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: knowledge and experience"
+    },
+    {
+      "code": "03030_Knowledge_Advanced",
+      "name": "Suitable for advanced investors",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: knowledge and experience"
+    },
+    {
+      "code": "04010_Loss_Bearing_No_Capital_Loss",
+      "name": "Investor can bear no capital loss",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: ability to bear losses",
+      "reference": "ESMA35-43-620 para. 18(c)"
+    },
+    {
+      "code": "04020_Loss_Bearing_Limited_Capital_Loss",
+      "name": "Investor can bear limited capital loss",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: ability to bear losses"
+    },
+    {
+      "code": "04030_Loss_Bearing_No_Capital_Guarantee",
+      "name": "Investor can bear loss of all capital",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: ability to bear losses"
+    },
+    {
+      "code": "04040_Loss_Bearing_Beyond_Capital",
+      "name": "Investor can bear losses beyond the capital invested",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: ability to bear losses"
+    },
+    {
+      "code": "05010_Risk_Tolerance_Indicator",
+      "name": "Risk indicator value",
+      "datatype": "integer",
+      "requirement": "mandatory",
+      "minimum": 1,
+      "maximum": 7,
+      "section": "Target market: risk tolerance",
+      "reference": "ESMA35-43-620 para. 18(d)"
+    },
+    {
+      "code": "05020_Risk_Tolerance_Methodology",
+      "name": "Risk indicator methodology",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["PRIIPS_SRI", "UCITS_SRRI", "INTERNAL"],
+      "section": "Target market: risk tolerance"
+    },
+    {
+      "code": "06010_Objective_Preservation",
+      "name": "Client objective: capital preservation",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: objectives and needs"
+    },
+    {
+      "code": "06020_Objective_Growth",
+      "name": "Client objective: capital growth",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: objectives and needs"
+    },
+    {
+      "code": "06030_Objective_Income",
+      "name": "Client objective: income",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: objectives and needs"
+    },
+    {
+      "code": "06040_Objective_Hedging",
+      "name": "Client objective: hedging",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Target market: objectives and needs"
+    },
+    {
+      "code": "06050_Recommended_Holding_Period",
+      "name": "Recommended holding period in years",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 50,
+      "section": "Target market: objectives and needs"
+    },
+    {
+      "code": "07010_Distribution_Execution_Only",
+      "name": "Distribution strategy: execution only",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Distribution strategy",
+      "reference": "ESMA35-43-620 para. 18(f)"
+    },
+    {
+      "code": "07020_Distribution_Appropriateness",
+      "name": "Distribution strategy: execution with appropriateness test",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Distribution strategy"
+    },
+    {
+      "code": "07030_Distribution_Investment_Advice",
+      "name": "Distribution strategy: investment advice",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Distribution strategy"
+    },
+    {
+      "code": "07040_Distribution_Portfolio_Management",
+      "name": "Distribution strategy: portfolio management",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Distribution strategy"
+    },
+    {
+      "code": "08010_Negative_Target_Market",
+      "name": "Negative target market description",
+      "datatype": "string",
+      "requirement": "optional",
+      "section": "Distribution strategy"
+    },
+    {
+      "code": "09010_One_Off_Cost_Entry",
+      "name": "Ex-ante one-off entry cost (%)",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Ex-ante costs",
+      "reference": "Delegated Regulation (EU) 2017/565 Art. 50"
+    },
+    {
+      "code": "09020_One_Off_Cost_Exit",
+      "name": "Ex-ante one-off exit cost (%)",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Ex-ante costs"
+    },
+    {
+      "code": "09030_Ongoing_Cost",
+      "name": "Ex-ante ongoing cost (%)",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Ex-ante costs"
+    },
+    {
+      "code": "09040_Transaction_Cost",
+      "name": "Ex-ante transaction cost (%)",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Ex-ante costs"
+    },
+    {
+      "code": "09050_Incidental_Cost_Performance_Fee",
+      "name": "Ex-ante incidental cost, performance fee (%)",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Ex-ante costs"
+    },
+    {
+      "code": "09060_Total_Cost_Ratio",
+      "name": "Total ex-ante cost (%)",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Ex-ante costs"
+    },
+    {
+      "code": "10010_Preference_A_Taxonomy_Share",
+      "name": "MiFID preference A: minimum taxonomy-aligned proportion (%)",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Sustainability preferences",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(a)"
+    },
+    {
+      "code": "10020_Preference_B_SFDR_Share",
+      "name": "MiFID preference B: minimum sustainable-investment proportion (%)",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "Sustainability preferences"
+    },
+    {
+      "code": "10030_Preference_C_PAI",
+      "name": "MiFID preference C: principal adverse impacts considered",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Sustainability preferences"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "EMT.TM.INVESTOR_TYPE_REQUIRED",
+      "title": "At least one investor type must be in the target market",
+      "reference": "Directive 2014/65/EU Art. 16(3); ESMA35-43-620 para. 18(a)",
+      "then": {
+        "any": [
+          {"field": "02010_Investor_Type_Retail", "equals": "Y"},
+          {"field": "02020_Investor_Type_Professional", "equals": "Y"},
+          {"field": "02030_Investor_Type_Eligible_Counterparty", "equals": "Y"}
+        ]
+      },
+      "message": "A product with no investor type in its target market cannot be distributed to anyone."
+    },
+    {
+      "rule_id": "EMT.TM.KNOWLEDGE_REQUIRED",
+      "title": "At least one knowledge and experience level must be identified",
+      "reference": "ESMA35-43-620 para. 18(b)",
+      "then": {
+        "any": [
+          {"field": "03010_Knowledge_Basic", "equals": "Y"},
+          {"field": "03020_Knowledge_Informed", "equals": "Y"},
+          {"field": "03030_Knowledge_Advanced", "equals": "Y"}
+        ]
+      },
+      "message": "The target market assessment must state the knowledge and experience a client needs."
+    },
+    {
+      "rule_id": "EMT.TM.DISTRIBUTION_STRATEGY_REQUIRED",
+      "title": "At least one distribution strategy must be permitted",
+      "reference": "ESMA35-43-620 para. 18(f)",
+      "then": {
+        "any": [
+          {"field": "07010_Distribution_Execution_Only", "equals": "Y"},
+          {"field": "07020_Distribution_Appropriateness", "equals": "Y"},
+          {"field": "07030_Distribution_Investment_Advice", "equals": "Y"},
+          {"field": "07040_Distribution_Portfolio_Management", "equals": "Y"}
+        ]
+      },
+      "message": "A product with no permitted distribution channel cannot reach a client."
+    },
+    {
+      "rule_id": "EMT.TM.LOSS_BEARING_CONTRADICTION",
+      "title": "A capital-protected and a loss-beyond-capital target market are mutually exclusive",
+      "reference": "ESMA35-43-620 para. 18(c)",
+      "when": {"field": "04010_Loss_Bearing_No_Capital_Loss", "equals": "Y"},
+      "then": {"field": "04040_Loss_Bearing_Beyond_Capital", "equals": "N"},
+      "message": "A product cannot simultaneously suit an investor who can bear no loss of capital and one who can lose more than the amount invested."
+    },
+    {
+      "rule_id": "EMT.TM.EXECUTION_ONLY_NEEDS_BASIC_KNOWLEDGE",
+      "title": "Execution-only distribution implies the product suits basic knowledge",
+      "severity": "warning",
+      "reference": "Directive 2014/65/EU Art. 25(4)",
+      "when": {"field": "07010_Distribution_Execution_Only", "equals": "Y"},
+      "then": {"field": "03010_Knowledge_Basic", "equals": "Y"},
+      "message": "Execution-only sales involve no appropriateness test, so a product sold that way should not require more than basic knowledge."
+    },
+    {
+      "rule_id": "EMT.TM.HIGH_RISK_NOT_FOR_CAPITAL_PRESERVATION",
+      "title": "A high risk indicator is inconsistent with a capital-preservation objective",
+      "severity": "warning",
+      "reference": "ESMA35-43-620 para. 18(e)",
+      "when": {"field": "05010_Risk_Tolerance_Indicator", "gte": 5},
+      "then": {"field": "06010_Objective_Preservation", "equals": "N"},
+      "message": "A product in risk class 5 or above should not be presented as meeting a capital-preservation objective."
+    },
+    {
+      "rule_id": "EMT.COST.TOTAL_COVERS_COMPONENTS",
+      "title": "The total cost ratio must be at least the sum of its recurring components",
+      "reference": "Delegated Regulation (EU) 2017/565 Art. 50(2)",
+      "when": {
+        "all": [
+          {"field": "09060_Total_Cost_Ratio", "present": true},
+          {"field": "09030_Ongoing_Cost", "present": true},
+          {"field": "09040_Transaction_Cost", "present": true}
+        ]
+      },
+      "then": {"field": "09060_Total_Cost_Ratio", "gte_field": "09030_Ongoing_Cost"},
+      "message": "The aggregated cost figure given to the client must not be lower than the ongoing cost component it contains."
+    },
+    {
+      "rule_id": "EMT.RISK.PRIIPS_METHODOLOGY_EXPECTED",
+      "title": "A retail product should quote the PRIIPs summary risk indicator",
+      "severity": "warning",
+      "reference": "Delegated Regulation (EU) 2017/653 Annex II",
+      "when": {"field": "02010_Investor_Type_Retail", "equals": "Y"},
+      "then": {"field": "05020_Risk_Tolerance_Methodology", "equals": "PRIIPS_SRI"},
+      "message": "A PRIIP offered to retail clients carries a KID, so the risk figure shared with distributors should be the PRIIPs SRI rather than the legacy UCITS SRRI or an internal scale."
+    },
+    {
+      "rule_id": "EMT.TM.OBJECTIVE_REQUIRED",
+      "title": "At least one client objective must be identified",
+      "reference": "ESMA35-43-620 para. 18(e)",
+      "then": {
+        "any": [
+          {"field": "06010_Objective_Preservation", "equals": "Y"},
+          {"field": "06020_Objective_Growth", "equals": "Y"},
+          {"field": "06030_Objective_Income", "equals": "Y"},
+          {"field": "06040_Objective_Hedging", "equals": "Y"}
+        ]
+      },
+      "message": "The target market assessment must state the client needs the product is designed to meet."
+    },
+    {
+      "rule_id": "EMT.TM.HOLDING_PERIOD_POSITIVE",
+      "title": "A recommended holding period must be stated",
+      "reference": "ESMA35-43-620 para. 18(e)",
+      "then": {"field": "06050_Recommended_Holding_Period", "gt": 0},
+      "message": "The recommended holding period drives both the suitability assessment and the PRIIPs cost table, so zero is not a valid answer."
+    }
+  ]
+}

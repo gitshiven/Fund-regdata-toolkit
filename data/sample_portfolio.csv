@@ -1,0 +1,29 @@
+#fund_name=Meridian European Equity Fund
+#nav=100000000
+#base_currency=EUR
+#valuation_date=2026-09-30
+#borrowing=9500000
+instrument_id,name,asset_class,issuer_id,issuer_name,is_public_body,is_covered_bond,is_eligible_art50,issuer_total_units,look_through_to_issuer,quantity,market_value,underlying_id,notional,counterparty,collateral_received,netting_set
+EQ_ACME,Acme Industrial SA ordinary shares,equity,ACME,Acme Industrial SA,false,false,true,1000000,true,115000,11500000,,,,,
+EQ_BETA,Beta Pharma NV ordinary shares,equity,BETA,Beta Pharma NV,false,false,true,2000000,true,80000,8000000,,,,,
+EQ_GAMMA,Gamma Energy AB ordinary shares,equity,GAMMA,Gamma Energy AB,false,false,true,,true,65000,6500000,,,,,
+EQ_DELTA,Delta Telecom SpA ordinary shares,equity,DELTA,Delta Telecom SpA,false,false,true,,true,52000,5200000,,,,,
+EQ_EPSILON,Epsilon Retail plc ordinary shares,equity,EPSILON,Epsilon Retail plc,false,false,true,,true,40000,4000000,,,,,
+EQ_ZETA,Zeta Logistics GmbH ordinary shares,equity,ZETA,Zeta Logistics GmbH,false,false,true,,true,38000,3800000,,,,,
+BD_LAMBDA_29,Lambda Chemicals 3.25% 2029,corporate_bond,LAMBDA,Lambda Chemicals NV,false,false,true,,true,6000,6000000,,,,,
+BD_MU_31,Mu Utilities 4.00% 2031,corporate_bond,MU,Mu Utilities SA,false,false,true,,true,4500,4500000,,,,,
+BD_DE_2033,Bundesrepublik Deutschland 2.30% 2033,government_bond,DE_SOVEREIGN,Federal Republic of Germany,true,false,true,,true,18000,18000000,,,,,
+CB_NORDBK_30,Nordbank Hypotheken Pfandbrief 2030,covered_bond,NORDBK,Nordbank Hypotheken AG,false,true,true,,true,7000,7000000,,,,,
+CB_DANSKE_28,Danske Realkredit covered bond 2028,covered_bond,DANSKE,Danske Realkredit A/S,false,true,true,,true,6000,6000000,,,,,
+DP_BNP_1M,One month term deposit,deposit,BNP,BNP Paribas SA,false,false,true,,true,1,5000000,,,,,
+DP_SG_1W,One week term deposit,deposit,SOCGEN,Societe Generale SA,false,false,true,,true,1,2000000,,,,,
+FU_EUROSC,Meridian European Smaller Companies Fund,ucits_fund,EUROSC,Meridian European Smaller Companies Fund,false,false,true,1000000,true,50000,5000000,,,,,
+FU_ALTCIS,Northgate Diversified Alternatives Fund,non_ucits_cis,ALTCIS,Northgate Diversified Alternatives Fund,false,false,true,,true,20000,2000000,,,,,
+XX_UNLISTED,Helios Infrastructure Holdings unlisted equity,ineligible,HELIOS,Helios Infrastructure Holdings,false,false,false,,true,15000,1500000,,,,,
+CA_EUR,Euro cash at bank,cash,BNP,BNP Paribas SA,false,false,true,,true,1,3370000,,,,,
+DV_TRS_SX5E_LONG,Total return swap on EURO STOXX 50 long leg,otc_derivative,SX5E,EURO STOXX 50 Index,false,false,true,,false,1,900000,SX5E,12000000,BNP,200000,NS_BNP
+DV_TRS_SX5E_SHORT,Total return swap on EURO STOXX 50 short leg,otc_derivative,SX5E,EURO STOXX 50 Index,false,false,true,,false,1,-120000,SX5E,-3000000,BNP,0,NS_BNP
+DV_IRS_10Y,Ten year EUR payer interest rate swap,otc_derivative,EUR_RATES,EUR interest rate curve,false,false,true,,false,1,-300000,EUR_SWAP_10Y,-8000000,BNP,0,NS_BNP
+DV_FX_USD,USD/EUR forward,otc_derivative,FX_USDEUR,USD/EUR,false,false,true,,false,1,250000,USDEUR,5000000,DEUTSCHE,0,NS_DB
+DV_FUT_SX5E,EURO STOXX 50 index future short,etd_derivative,SX5E,EURO STOXX 50 Index,false,false,true,,false,-40,-150000,SX5E,-4000000,,0,
+DV_FUT_ACME,Acme Industrial single stock future,etd_derivative,ACME,Acme Industrial SA,false,false,true,,true,100,50000,ACME,1000000,,0,NS_SSF

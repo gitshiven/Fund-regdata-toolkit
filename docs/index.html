@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fund Regulatory Data Hub</title>
+<meta name="description" content="UCITS limits, PRIIPs KID figures and EET/EMT validation for a sample fund range.">
+<style>
+:root{
+  --ink:#131920;--muted:#5f6b7c;--faint:#8b95a5;--line:#dde3eb;--bg:#f4f6fa;
+  --panel:#ffffff;--panel2:#f7f9fc;--accent:#1f4e79;--accent-soft:#e8f0f8;
+  --ok:#1a6b45;--warn:#9a6212;--bad:#9a1f2e;--none:#5b6473;
+  --radius:11px;--shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --ink:#e8edf4;--muted:#9fabbd;--faint:#768295;--line:#28313e;--bg:#0f151c;
+  --panel:#161e27;--panel2:#1b242f;--accent:#7fb3e3;--accent-soft:#1c2a38;
+  --ok:#53c48c;--warn:#e2ad52;--bad:#f2798c;--none:#8a95a6;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}}
+:root[data-theme=dark]{
+  --ink:#e8edf4;--muted:#9fabbd;--faint:#768295;--line:#28313e;--bg:#0f151c;
+  --panel:#161e27;--panel2:#1b242f;--accent:#7fb3e3;--accent-soft:#1c2a38;
+  --ok:#53c48c;--warn:#e2ad52;--bad:#f2798c;--none:#8a95a6;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:30px 16px 64px}
+header{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;
+  justify-content:space-between;margin-bottom:8px}
+h1{font-size:26px;margin:0;letter-spacing:-.015em}
+.tag{font-size:12.5px;color:var(--muted);margin:5px 0 0}
+.theme{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  border-radius:999px;padding:6px 15px;font:inherit;font-size:12.5px;cursor:pointer}
+h2{font-size:17px;margin:38px 0 12px;letter-spacing:-.01em}
+h2 .hint{font-weight:400;font-size:12.5px;color:var(--muted);margin-left:8px}
+h3{font-size:14px;margin:20px 0 8px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.06em;font-weight:600}
+a{color:var(--accent)}
+.grid{display:grid;gap:12px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(168px,1fr));margin-top:18px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 17px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums;
+  letter-spacing:-.02em}
+.kpi span{display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.06em;margin-top:5px}
+.kpi small{display:block;font-size:12px;color:var(--faint);margin-top:4px}
+.kpi.ok b{color:var(--ok)}.kpi.warn b{color:var(--warn)}.kpi.bad b{color:var(--bad)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:var(--shadow)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 16px}
+.tabs button{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  border-radius:999px;padding:7px 16px;font:inherit;font-size:13px;cursor:pointer;
+  transition:background .12s,border-color .12s}
+.tabs button:hover{border-color:var(--accent)}
+.tabs button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.cols{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 9px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;
+  letter-spacing:.04em}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+.scale{display:flex;gap:4px;margin:6px 0}
+.scale i{flex:1;text-align:center;padding:9px 0;border:1px solid var(--line);border-radius:5px;
+  font-style:normal;font-weight:600;font-size:13px;color:var(--faint);background:var(--panel2)}
+.scale i.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint)}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;
+  font-weight:600;white-space:nowrap}
+.badge.ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.badge.warn{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn)}
+.badge.bad{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+.badge.none{background:color-mix(in srgb,var(--none) 16%,transparent);color:var(--none)}
+.badge.art6{background:var(--accent-soft);color:var(--accent)}
+.rule{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;
+  color:var(--faint);display:block;margin-top:2px}
+.msg{color:var(--muted);font-size:12.5px;margin-top:3px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:7px 16px;margin:0;font-size:13.5px}
+dt{color:var(--muted)}dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.bars{margin-top:4px}
+.bar{display:grid;grid-template-columns:120px 1fr 86px;gap:10px;align-items:center;
+  font-size:13px;margin-bottom:7px}
+.bar .track{background:var(--panel2);border:1px solid var(--line);border-radius:4px;height:19px;
+  position:relative;overflow:hidden}
+.bar .fill{position:absolute;top:0;bottom:0;left:50%;background:var(--accent);opacity:.85}
+.bar .zero{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
+.bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.links a{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:7px 14px;
+  text-decoration:none;font-size:13px;background:var(--panel2)}
+.links a:hover{border-color:var(--accent)}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--muted)}
+.loading,.error{padding:40px 0;color:var(--muted);text-align:center}
+.error code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;
+  padding:2px 7px;font-size:12.5px}
+@media (max-width:620px){
+  .bar{grid-template-columns:92px 1fr 72px}
+  dl{grid-template-columns:1fr auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Fund Regulatory Data Hub</h1>
+      <p class="tag" id="tagline">UCITS limits, PRIIPs KID figures and EET/EMT validation
+        for a sample UCITS range.</p>
+    </div>
+    <button class="theme" id="theme" type="button">Theme</button>
+  </header>
+
+  <div id="app"><p class="loading">Loading&hellip;</p></div>
+
+  <footer>
+    <p>Generated by <a href="https://github.com/">fund-regdata-toolkit</a> from
+      synthetic data. Every figure is computed by the library in this repository
+      from the committed sample files. It demonstrates the methodology of
+      Directive 2009/65/EC, Delegated Regulation (EU) 2017/653 and the FinDatEx
+      distribution templates; it is not a regulatory filing and not investment advice.</p>
+    <p id="stamp"></p>
+  </footer>
+</div>
+
+<script>
+const SEV = {breach:['Breach','bad'], warning:['Warning','warn'], pass:['Pass','ok'],
+             inconclusive:['No data','none']};
+const SFDR_LABEL = {ARTICLE_6:'SFDR Article 6', ARTICLE_8:'SFDR Article 8',
+                    ARTICLE_9:'SFDR Article 9'};
+const SCENARIO_ORDER = ['stress','unfavourable','moderate','favourable'];
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pct = (v, d = 2) => (v == null ? '' : v.toFixed(d) + '%');
+const money = (v, ccy) => ccy + ' ' + Math.round(v).toLocaleString('en-GB');
+
+/* ---------- theme ---------- */
+const themeButton = document.getElementById('theme');
+const stored = (() => { try { return localStorage.getItem('frdh-theme'); } catch { return null; } })();
+if (stored) document.documentElement.setAttribute('data-theme', stored);
+themeButton.addEventListener('click', () => {
+  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  const current = document.documentElement.getAttribute('data-theme') || (dark ? 'dark' : 'light');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('frdh-theme', next); } catch {}
+});
+
+/* ---------- rendering ---------- */
+function kpis(d) {
+  const breaches = d.ucits.counts.breach + d.templates.eet.counts.breach
+                 + d.templates.emt.counts.breach + d.templates.reconciliation.counts.breach;
+  const warnings = d.ucits.counts.warning + d.templates.eet.counts.warning
+                 + d.templates.emt.counts.warning;
+  const rules = Object.values(d.ucits.counts).reduce((a, b) => a + b, 0)
+              + Object.values(d.templates.eet.counts).reduce((a, b) => a + b, 0)
+              + Object.values(d.templates.emt.counts).reduce((a, b) => a + b, 0)
+              + Object.values(d.templates.reconciliation.counts).reduce((a, b) => a + b, 0);
+  const cards = [
+    ['', d.funds.length, 'Share classes', 'with a computed KID'],
+    ['', rules, 'Rules evaluated', 'across four engines'],
+    [breaches ? 'bad' : 'ok', breaches, 'Breaches', 'hard limits exceeded'],
+    [warnings ? 'warn' : 'ok', warnings, 'Warnings', 'inside the limit, close to it'],
+  ];
+  return `<div class="grid kpis">${cards.map(([cls, value, label, sub]) =>
+    `<div class="kpi ${cls}"><b>${value}</b><span>${label}</span><small>${sub}</small></div>`
+  ).join('')}</div>`;
+}
+
+function sriScale(sri) {
+  const cells = Array.from({length: 7}, (_, i) =>
+    `<i class="${i + 1 === sri ? 'on' : ''}">${i + 1}</i>`).join('');
+  return `<div class="scale">${cells}</div>
+          <div class="ends"><span>Lower risk</span><span>Higher risk</span></div>`;
+}
+
+function scenarioBars(set, ccy) {
+  const rows = SCENARIO_ORDER.filter(n => set.scenarios[n]).map(n => set.scenarios[n]);
+  const span = Math.max(...rows.map(s => Math.abs(s.total_return)), 0.1);
+  return `<div class="bars">${rows.map(s => {
+    const share = Math.min(Math.abs(s.total_return) / span, 1) * 50;
+    const style = s.total_return < 0
+      ? `left:${50 - share}%;width:${share}%;background:var(--bad)`
+      : `left:50%;width:${share}%`;
+    return `<div class="bar"><span>${esc(s.label)}</span>
+      <span class="track"><span class="fill" style="${style}"></span><span class="zero"></span></span>
+      <span class="val">${money(s.value, ccy)}</span></div>`;
+  }).join('')}</div>
+  <p class="note">${esc(set.methodology)}. Investment of ${money(set.investment, ccy)},
+     exit after ${set.years} year${set.years === 1 ? '' : 's'}.</p>`;
+}
+
+function eetRow(data, isin) {
+  return (data.templates.eet_rows || []).find(r => r['00020_Portfolio_Identifying_Data'] === isin) || {};
+}
+function emtRow(data, isin) {
+  return (data.templates.emt_rows || []).find(r => r['00010_Financial_Instrument_Identifier'] === isin) || {};
+}
+
+function defList(pairs) {
+  return `<dl>${pairs.filter(p => p[1] !== '' && p[1] != null)
+    .map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')}</dl>`;
+}
+
+function yn(v) {
+  if (v === 'Y') return '<span class="badge ok">Yes</span>';
+  if (v === 'N') return '<span class="badge none">No</span>';
+  return '';
+}
+
+function fundPanel(data, fund) {
+  const eet = eetRow(data, fund.isin);
+  const emt = emtRow(data, fund.isin);
+  const ccy = fund.currency;
+  const rhpSet = fund.scenarios[fund.scenarios.length - 1];
+  const rhpCost = fund.costs[fund.costs.length - 1];
+
+  const targets = [
+    ['Retail clients', emt['02010_Investor_Type_Retail']],
+    ['Professional clients', emt['02020_Investor_Type_Professional']],
+    ['Basic knowledge sufficient', emt['03010_Knowledge_Basic']],
+    ['Can bear loss of all capital', emt['04030_Loss_Bearing_No_Capital_Guarantee']],
+    ['Execution only permitted', emt['07010_Distribution_Execution_Only']],
+    ['Investment advice permitted', emt['07030_Distribution_Investment_Advice']],
+  ].filter(p => p[1]);
+
+  return `
+  <div class="panel">
+    <div class="cols">
+      <div>
+        <h3>Summary risk indicator</h3>
+        ${sriScale(fund.sri)}
+        ${defList([
+          ['Market risk class', fund.mrm_class],
+          ['Credit risk class', fund.crm_class],
+          ['VaR-equivalent volatility', pct(fund.vev * 100)],
+          ['Realised volatility, annualised', pct(fund.volatility_annualised * 100)],
+          ['Skewness', fund.skewness.toFixed(3)],
+          ['Excess kurtosis', fund.excess_kurtosis.toFixed(3)],
+          ['Observations', fund.observations.toLocaleString('en-GB')],
+        ])}
+      </div>
+      <div>
+        <h3>Product</h3>
+        ${defList([
+          ['ISIN', `<code>${esc(fund.isin)}</code>`],
+          ['Classification', `<span class="badge art6">${esc(SFDR_LABEL[fund.sfdr] || fund.sfdr)}</span>`],
+          ['Recommended holding period', fund.rhp_years + ' years'],
+          ['Ongoing charge', pct(fund.ongoing_charge)],
+          ['Reduction in yield at the RHP', pct(rhpCost.riy_pct)],
+          ['Total costs at the RHP', money(rhpCost.total_costs, ccy)],
+        ])}
+        <p class="note">${esc(fund.objectives)}</p>
+      </div>
+    </div>
+
+    <h3>Performance scenarios at the recommended holding period</h3>
+    ${scenarioBars(rhpSet, ccy)}
+
+    <div class="cols">
+      <div>
+        <h3>Costs over time</h3>
+        <table><thead><tr><th>Exit after</th><th class="num">Total costs</th>
+          <th class="num">Annual cost impact</th></tr></thead><tbody>
+          ${fund.costs.map(c => `<tr><td>${c.years} year${c.years === 1 ? '' : 's'}</td>
+            <td class="num">${money(c.total_costs, ccy)}</td>
+            <td class="num">${pct(c.riy_pct)}</td></tr>`).join('')}
+        </tbody></table>
+      </div>
+      <div>
+        <h3>Sustainability profile (EET)</h3>
+        ${defList([
+          ['Minimum sustainable investments', eet['20020_Sustainable_Investment_Minimum_Share']
+            ? eet['20020_Sustainable_Investment_Minimum_Share'] + '%' : '&mdash;'],
+          ['Minimum taxonomy aligned', eet['20030_Taxonomy_Aligned_Minimum_Share']
+            ? eet['20030_Taxonomy_Aligned_Minimum_Share'] + '%' : '&mdash;'],
+          ['Considers adverse impacts', yn(eet['20060_PAI_Considered'])],
+          ['Mandatory PAI indicators', eet['20070_PAI_Mandatory_Indicators_Covered'] || '&mdash;'],
+          ['PAI data coverage', eet['22900_PAI_Coverage_Ratio']
+            ? eet['22900_PAI_Coverage_Ratio'] + '%' : '&mdash;'],
+          ['Carbon footprint (tCO2e/EURm)', eet['22020_PAI_2_Carbon_Footprint'] || '&mdash;'],
+        ])}
+      </div>
+    </div>
+
+    ${targets.length ? `<h3>Target market (EMT)</h3>
+      ${defList(targets.map(([k, v]) => [k, yn(v)]).concat([
+        ['Risk indicator quoted to distributors', emt['05010_Risk_Tolerance_Indicator'] || '&mdash;'],
+        ['Risk methodology', esc(emt['05020_Risk_Tolerance_Methodology'] || '&mdash;')],
+        ['Total ex-ante cost', emt['09060_Total_Cost_Ratio']
+          ? emt['09060_Total_Cost_Ratio'] + '%' : '&mdash;'],
+      ]))}` : ''}
+
+    <div class="links"><a href="${esc(fund.kid_url)}">Open the full Key Information Document</a></div>
+  </div>`;
+}
+
+function findingsTable(findings, emptyText) {
+  if (!findings.length) return `<p class="note">${esc(emptyText)}</p>`;
+  return `<table><thead><tr><th>Outcome</th><th>Subject</th><th>Rule</th>
+    <th class="num">Actual</th><th class="num">Limit</th></tr></thead><tbody>
+    ${findings.map(f => {
+      const [label, cls] = SEV[f.severity] || ['', 'none'];
+      return `<tr><td><span class="badge ${cls}">${label}</span></td>
+        <td>${esc(f.subject)}</td>
+        <td>${esc(f.title)}<span class="rule">${esc(f.rule_id)}</span>
+            <div class="msg">${esc(f.message)}</div></td>
+        <td class="num">${f.actual == null ? '' : f.actual.toFixed(2)}</td>
+        <td class="num">${f.limit == null ? '' : f.limit.toFixed(2)}</td></tr>`;
+    }).join('')}</tbody></table>`;
+}
+
+function ucitsSection(u) {
+  return `<h2>UCITS investment limits
+    <span class="hint">Directive 2009/65/EC Arts. 50&ndash;57 and 83, CESR/10-788</span></h2>
+  <div class="panel">
+    <div class="cols">
+      <div>${defList([
+        ['Fund', esc(u.fund_name)],
+        ['Net asset value', money(u.nav, u.currency)],
+        ['Valuation date', esc(u.valuation_date)],
+        ['Positions', u.positions],
+      ])}</div>
+      <div>${defList([
+        ['Global exposure, commitment approach', pct(u.global_exposure_pct)],
+        ['Gross commitment before netting', pct(u.gross_exposure_pct)],
+        ['Netting and hedging benefit', pct(u.netting_benefit_pct)],
+        ['Rules evaluated', Object.values(u.counts).reduce((a, b) => a + b, 0)],
+      ])}</div>
+    </div>
+    <h3>Breaches and early warnings</h3>
+    ${findingsTable(u.findings, 'Every limit tested was comfortably observed.')}
+    <div class="links"><a href="${esc(u.report_url)}">Open the full limit report</a></div>
+  </div>`;
+}
+
+function templateSection(t) {
+  const block = (p, title, hint) => `
+    <h3>${title}</h3>
+    ${defList([
+      ['Version', esc(p.version || '')],
+      ['Share classes', p.rows],
+      ['Fields declared', p.fields],
+      ['Cross-field rules', p.rules],
+    ])}
+    ${findingsTable(p.findings, 'No problems found.')}
+    <div class="links"><a href="${esc(p.report_url)}">Open the ${hint} report</a></div>`;
+
+  return `<h2>Distribution templates
+    <span class="hint">SFDR, EU Taxonomy and MiFID II product governance data</span></h2>
+  <div class="panel">
+    ${block(t.eet, 'European ESG Template', 'EET')}
+    ${block(t.emt, 'European MiFID Template', 'EMT')}
+    <h3>EET / EMT reconciliation</h3>
+    ${findingsTable(t.reconciliation.findings,
+      'The sustainability preference fields agree across both files.')}
+    <div class="links">
+      <a href="${esc(t.reconciliation.report_url)}">Open the reconciliation report</a>
+    </div>
+  </div>`;
+}
+
+function render(data) {
+  const app = document.getElementById('app');
+  document.getElementById('stamp').textContent = `Data generated ${data.generated} by fundreg ${data.version}.`;
+
+  app.innerHTML = `
+    ${kpis(data)}
+    <h2>Share classes <span class="hint">PRIIPs KID figures computed from ten years of daily returns</span></h2>
+    <div class="tabs" id="tabs" role="tablist">
+      ${data.funds.map((f, i) =>
+        `<button role="tab" data-index="${i}" aria-selected="${i === 0}">${esc(f.name)}</button>`
+      ).join('')}
+    </div>
+    <div id="fund"></div>
+    ${ucitsSection(data.ucits)}
+    ${templateSection(data.templates)}`;
+
+  const target = document.getElementById('fund');
+  const show = i => {
+    target.innerHTML = fundPanel(data, data.funds[i]);
+    document.querySelectorAll('#tabs button').forEach(b =>
+      b.setAttribute('aria-selected', String(Number(b.dataset.index) === i)));
+  };
+  document.querySelectorAll('#tabs button').forEach(b =>
+    b.addEventListener('click', () => show(Number(b.dataset.index))));
+  show(0);
+}
+
+fetch('data/funds.json')
+  .then(r => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.json(); })
+  .then(render)
+  .catch(err => {
+    document.getElementById('app').innerHTML =
+      `<p class="error">Could not load <code>data/funds.json</code> (${esc(err.message)}).<br>
+       Opening this file directly from disk will not work because the browser blocks
+       the fetch. Serve the folder instead: <code>python -m http.server -d docs</code>.</p>`;
+  });
+</script>
+</body>
+</html>

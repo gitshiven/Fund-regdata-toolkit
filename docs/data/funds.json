@@ -1,0 +1,1063 @@
+{
+ "generated": "2026-11-09 22:31 UTC",
+ "version": "0.1.0",
+ "funds": [
+  {
+   "key": "meridian_european_equity",
+   "name": "Meridian European Equity Fund A EUR Acc",
+   "isin": "LU1234567AB9",
+   "sfdr": "ARTICLE_8",
+   "rhp_years": 5,
+   "currency": "EUR",
+   "objectives": "Long term capital growth by investing at least two thirds of assets in equities of companies domiciled or principally active in Europe.",
+   "sri": 4,
+   "mrm_class": 4,
+   "crm_class": 1,
+   "vev": 0.17257,
+   "volatility_annualised": 0.172452,
+   "skewness": -0.0842,
+   "excess_kurtosis": 0.2207,
+   "observations": 2560,
+   "scenarios": [
+    {
+     "years": 1.0,
+     "investment": 10000.0,
+     "methodology": "Annex IV as amended by (EU) 2021/2268, sub-period selection from history",
+     "scenarios": {
+      "unfavourable": {
+       "label": "Unfavourable",
+       "value": 7253.06,
+       "total_return": -0.274694,
+       "annualised_return": -0.274694,
+       "basis": "worst of 2305 overlapping sub-periods"
+      },
+      "moderate": {
+       "label": "Moderate",
+       "value": 10760.0,
+       "total_return": 0.076,
+       "annualised_return": 0.076,
+       "basis": "median of 2305 overlapping sub-periods"
+      },
+      "favourable": {
+       "label": "Favourable",
+       "value": 14762.94,
+       "total_return": 0.476294,
+       "annualised_return": 0.476294,
+       "basis": "best of 2305 overlapping sub-periods"
+      },
+      "stress": {
+       "label": "Stress",
+       "value": 6682.82,
+       "total_return": -0.331718,
+       "annualised_return": -0.331718,
+       "basis": "Cornish-Fisher at the 5th percentile using a stressed volatility of 22.89% annualised, taken as the 95% percentile of 21-period rolling volatilities"
+      }
+     }
+    },
+    {
+     "years": 5,
+     "investment": 10000.0,
+     "methodology": "Annex IV as amended by (EU) 2021/2268, sub-period selection from history",
+     "scenarios": {
+      "unfavourable": {
+       "label": "Unfavourable",
+       "value": 9151.76,
+       "total_return": -0.084824,
+       "annualised_return": -0.017572,
+       "basis": "worst of 1281 overlapping sub-periods"
+      },
+      "moderate": {
+       "label": "Moderate",
+       "value": 12276.05,
+       "total_return": 0.227605,
+       "annualised_return": 0.041866,
+       "basis": "median of 1281 overlapping sub-periods"
+      },
+      "favourable": {
+       "label": "Favourable",
+       "value": 20512.54,
+       "total_return": 1.051254,
+       "annualised_return": 0.154526,
+       "basis": "best of 1281 overlapping sub-periods"
+      },
+      "stress": {
+       "label": "Stress",
+       "value": 2321.34,
+       "total_return": -0.767866,
+       "annualised_return": -0.253297,
+       "basis": "Cornish-Fisher at the 1th percentile using a stressed volatility of 25.04% annualised, taken as the 99% percentile of 63-period rolling volatilities"
+      }
+     }
+    }
+   ],
+   "costs": [
+    {
+     "years": 1.0,
+     "investment": 10000.0,
+     "total_costs": 123.0,
+     "riy": 0.0123,
+     "riy_pct": 1.23,
+     "gross_annualised_return": 0.041866,
+     "net_annualised_return": 0.029566,
+     "final_value_gross": 10418.66,
+     "final_value_net": 10295.66,
+     "composition": {
+      "entry_costs": 0.0,
+      "exit_costs": 0.0,
+      "management_fees": 0.0105,
+      "transaction_costs": 0.0018,
+      "performance_fees": 0.0,
+      "carried_interest": 0.0
+     }
+    },
+    {
+     "years": 3.0,
+     "investment": 10000.0,
+     "total_costs": 395.83,
+     "riy": 0.0123,
+     "riy_pct": 1.23,
+     "gross_annualised_return": 0.041866,
+     "net_annualised_return": 0.029566,
+     "final_value_gross": 11309.29,
+     "final_value_net": 10913.45,
+     "composition": {
+      "entry_costs": 0.0,
+      "exit_costs": 0.0,
+      "management_fees": 0.0105,
+      "transaction_costs": 0.0018,
+      "performance_fees": 0.0,
+      "carried_interest": 0.0
+     }
+    },
+    {
+     "years": 5,
+     "investment": 10000.0,
+     "total_costs": 707.73,
+     "riy": 0.0123,
+     "riy_pct": 1.23,
+     "gross_annualised_return": 0.041866,
+     "net_annualised_return": 0.029566,
+     "final_value_gross": 12276.05,
+     "final_value_net": 11568.32,
+     "composition": {
+      "entry_costs": 0.0,
+      "exit_costs": 0.0,
+      "management_fees": 0.0105,
+      "transaction_costs": 0.0018,
+      "performance_fees": 0.0,
+      "carried_interest": 0.0
+     }
+    }
+   ],
+   "ongoing_charge": 1.23,
+   "kid_url": "kid/meridian_european_equity.html"
+  },
+  {
+   "key": "meridian_climate_transition",
+   "name": "Meridian Climate Transition Fund I EUR Acc",
+   "isin": "LU7654321CD1",
+   "sfdr": "ARTICLE_9",
+   "rhp_years": 7,
+   "currency": "EUR",
+   "objectives": "Sustainable investment objective of contributing to the transition to a low carbon economy, measured by the weighted carbon intensity of holdings.",
+   "sri": 5,
+   "mrm_class": 5,
+   "crm_class": 1,
+   "vev": 0.258761,
+   "volatility_annualised": 0.258607,
+   "skewness": -0.1122,
+   "excess_kurtosis": 1.6481,
+   "observations": 2560,
+   "scenarios": [
+    {
+     "years": 1.0,
+     "investment": 10000.0,
+     "methodology": "Annex IV as amended by (EU) 2021/2268, sub-period selection from history",
+     "scenarios": {
+      "unfavourable": {
+       "label": "Unfavourable",
+       "value": 6533.02,
+       "total_return": -0.346698,
+       "annualised_return": -0.346698,
+       "basis": "worst of 2305 overlapping sub-periods"
+      },
+      "moderate": {
+       "label": "Moderate",
+       "value": 11552.32,
+       "total_return": 0.155232,
+       "annualised_return": 0.155232,
+       "basis": "median of 2305 overlapping sub-periods"
+      },
+      "favourable": {
+       "label": "Favourable",
+       "value": 20512.38,
+       "total_return": 1.051238,
+       "annualised_return": 1.051238,
+       "basis": "best of 2305 overlapping sub-periods"
+      },
+      "stress": {
+       "label": "Stress",
+       "value": 5012.91,
+       "total_return": -0.498709,
+       "annualised_return": -0.498709,
+       "basis": "Cornish-Fisher at the 5th percentile using a stressed volatility of 37.64% annualised, taken as the 95% percentile of 21-period rolling volatilities"
+      }
+     }
+    },
+    {
+     "years": 7,
+     "investment": 10000.0,
+     "methodology": "Annex IV as amended by (EU) 2021/2268, sub-period selection from history",
+     "scenarios": {
+      "unfavourable": {
+       "label": "Unfavourable",
+       "value": 17365.45,
+       "total_return": 0.736545,
+       "annualised_return": 0.082034,
+       "basis": "worst of 769 overlapping sub-periods"
+      },
+      "moderate": {
+       "label": "Moderate",
+       "value": 23114.36,
+       "total_return": 1.311436,
+       "annualised_return": 0.127154,
+       "basis": "median of 769 overlapping sub-periods"
+      },
+      "favourable": {
+       "label": "Favourable",
+       "value": 31600.64,
+       "total_return": 2.160064,
+       "annualised_return": 0.178651,
+       "basis": "best of 769 overlapping sub-periods"
+      },
+      "stress": {
+       "label": "Stress",
+       "value": 559.42,
+       "total_return": -0.944058,
+       "annualised_return": -0.337622,
+       "basis": "Cornish-Fisher at the 1th percentile using a stressed volatility of 38.42% annualised, taken as the 99% percentile of 63-period rolling volatilities"
+      }
+     }
+    }
+   ],
+   "costs": [
+    {
+     "years": 1.0,
+     "investment": 10000.0,
+     "total_costs": 402.81,
+     "riy": 0.040281,
+     "riy_pct": 4.0281,
+     "gross_annualised_return": 0.127154,
+     "net_annualised_return": 0.086873,
+     "final_value_gross": 11271.54,
+     "final_value_net": 10868.73,
+     "composition": {
+      "entry_costs": 0.022342,
+      "exit_costs": 0.0,
+      "management_fees": 0.013875,
+      "transaction_costs": 0.002577,
+      "performance_fees": 0.001487,
+      "carried_interest": 0.0
+     }
+    },
+    {
+     "years": 4.0,
+     "investment": 10000.0,
+     "total_costs": 1314.66,
+     "riy": 0.023687,
+     "riy_pct": 2.3687,
+     "gross_annualised_return": 0.127154,
+     "net_annualised_return": 0.103466,
+     "final_value_gross": 16141.08,
+     "final_value_net": 14826.42,
+     "composition": {
+      "entry_costs": 0.005657,
+      "exit_costs": 0.0,
+      "management_fees": 0.013946,
+      "transaction_costs": 0.00259,
+      "performance_fees": 0.001494,
+      "carried_interest": 0.0
+     }
+    },
+    {
+     "years": 7,
+     "investment": 10000.0,
+     "total_costs": 2889.11,
+     "riy": 0.021296,
+     "riy_pct": 2.1296,
+     "gross_annualised_return": 0.127154,
+     "net_annualised_return": 0.105857,
+     "final_value_gross": 23114.36,
+     "final_value_net": 20225.25,
+     "composition": {
+      "entry_costs": 0.00324,
+      "exit_costs": 0.0,
+      "management_fees": 0.013966,
+      "transaction_costs": 0.002594,
+      "performance_fees": 0.001496,
+      "carried_interest": 0.0
+     }
+    }
+   ],
+   "ongoing_charge": 1.66,
+   "kid_url": "kid/meridian_climate_transition.html"
+  },
+  {
+   "key": "meridian_global_bond",
+   "name": "Meridian Global Bond Fund A EUR Dis",
+   "isin": "LU2468013EF2",
+   "sfdr": "ARTICLE_6",
+   "rhp_years": 3,
+   "currency": "EUR",
+   "objectives": "Income and modest capital growth from a diversified portfolio of global investment grade government and corporate debt.",
+   "sri": 3,
+   "mrm_class": 3,
+   "crm_class": 1,
+   "vev": 0.052559,
+   "volatility_annualised": 0.0523,
+   "skewness": -0.4534,
+   "excess_kurtosis": 3.1884,
+   "observations": 2560,
+   "scenarios": [
+    {
+     "years": 1.0,
+     "investment": 10000.0,
+     "methodology": "Annex IV as amended by (EU) 2021/2268, sub-period selection from history",
+     "scenarios": {
+      "unfavourable": {
+       "label": "Unfavourable",
+       "value": 9233.07,
+       "total_return": -0.076693,
+       "annualised_return": -0.076693,
+       "basis": "worst of 2305 overlapping sub-periods"
+      },
+      "moderate": {
+       "label": "Moderate",
+       "value": 10305.29,
+       "total_return": 0.030529,
+       "annualised_return": 0.030529,
+       "basis": "median of 2305 overlapping sub-periods"
+      },
+      "favourable": {
+       "label": "Favourable",
+       "value": 11555.3,
+       "total_return": 0.15553,
+       "annualised_return": 0.15553,
+       "basis": "best of 2305 overlapping sub-periods"
+      },
+      "stress": {
+       "label": "Stress",
+       "value": 8741.53,
+       "total_return": -0.125847,
+       "annualised_return": -0.125847,
+       "basis": "Cornish-Fisher at the 5th percentile using a stressed volatility of 7.95% annualised, taken as the 95% percentile of 21-period rolling volatilities"
+      }
+     }
+    },
+    {
+     "years": 3,
+     "investment": 10000.0,
+     "methodology": "Annex IV as amended by (EU) 2021/2268, sub-period selection from history",
+     "scenarios": {
+      "unfavourable": {
+       "label": "Unfavourable",
+       "value": 8932.66,
+       "total_return": -0.106734,
+       "annualised_return": -0.036925,
+       "basis": "worst of 1793 overlapping sub-periods"
+      },
+      "moderate": {
+       "label": "Moderate",
+       "value": 10526.89,
+       "total_return": 0.052689,
+       "annualised_return": 0.017263,
+       "basis": "median of 1793 overlapping sub-periods"
+      },
+      "favourable": {
+       "label": "Favourable",
+       "value": 12919.21,
+       "total_return": 0.291921,
+       "annualised_return": 0.089127,
+       "basis": "best of 1793 overlapping sub-periods"
+      },
+      "stress": {
+       "label": "Stress",
+       "value": 6675.58,
+       "total_return": -0.332442,
+       "annualised_return": -0.12603,
+       "basis": "Cornish-Fisher at the 1th percentile using a stressed volatility of 9.63% annualised, taken as the 99% percentile of 63-period rolling volatilities"
+      }
+     }
+    }
+   ],
+   "costs": [
+    {
+     "years": 1.0,
+     "investment": 10000.0,
+     "total_costs": 121.51,
+     "riy": 0.012151,
+     "riy_pct": 1.2151,
+     "gross_annualised_return": 0.017263,
+     "net_annualised_return": 0.005112,
+     "final_value_gross": 10172.63,
+     "final_value_net": 10051.12,
+     "composition": {
+      "entry_costs": 0.0,
+      "exit_costs": 0.005071,
+      "management_fees": 0.006182,
+      "transaction_costs": 0.000897,
+      "performance_fees": 0.0,
+      "carried_interest": 0.0
+     }
+    },
+    {
+     "years": 3,
+     "investment": 10000.0,
+     "total_costs": 270.42,
+     "riy": 0.008786,
+     "riy_pct": 0.8786,
+     "gross_annualised_return": 0.017263,
+     "net_annualised_return": 0.008477,
+     "final_value_gross": 10526.89,
+     "final_value_net": 10256.47,
+     "composition": {
+      "entry_costs": 0.0,
+      "exit_costs": 0.001696,
+      "management_fees": 0.006192,
+      "transaction_costs": 0.000899,
+      "performance_fees": 0.0,
+      "carried_interest": 0.0
+     }
+    }
+   ],
+   "ongoing_charge": 0.71,
+   "kid_url": "kid/meridian_global_bond.html"
+  }
+ ],
+ "ucits": {
+  "fund_name": "Meridian European Equity Fund",
+  "nav": 100000000.0,
+  "currency": "EUR",
+  "valuation_date": "2026-09-30",
+  "positions": 23,
+  "counts": {
+   "pass": 33,
+   "warning": 2,
+   "breach": 2,
+   "inconclusive": 10
+  },
+  "compliant": false,
+  "global_exposure_pct": 27.0,
+  "gross_exposure_pct": 33.0,
+  "netting_benefit_pct": 6.0,
+  "report_url": "reports/ucits.html",
+  "findings": [
+   {
+    "rule_id": "UCITS.ART52.1A.SINGLE_ISSUER",
+    "reference": "Directive 2009/65/EC Art. 52(1)(a), Art. 52(2)",
+    "title": "Single issuer, transferable securities and money market instruments",
+    "severity": "breach",
+    "subject": "Acme Industrial SA (ACME)",
+    "actual": 12.5,
+    "limit": 10.0,
+    "unit": "% NAV",
+    "message": "12.50% exceeds the 10.00% limit",
+    "detail": {
+     "instruments": [
+      "EQ_ACME",
+      "DV_FUT_ACME"
+     ]
+    },
+    "headroom": -2.5
+   },
+   {
+    "rule_id": "UCITS.ART56.INFLUENCE",
+    "reference": "Directive 2009/65/EC Art. 56(2)",
+    "title": "Share of a single issue held",
+    "severity": "breach",
+    "subject": "Acme Industrial SA ordinary shares (EQ_ACME)",
+    "actual": 11.5,
+    "limit": 10.0,
+    "unit": "% of issue",
+    "message": "11.50% of issue exceeds the 10.00% limit",
+    "detail": {
+     "units_held": 115000.0,
+     "units_in_issue": 1000000.0
+    },
+    "headroom": -1.5
+   },
+   {
+    "rule_id": "UCITS.ART52.2.AGGREGATE_40",
+    "reference": "Directive 2009/65/EC Art. 52(2), Art. 52(5)",
+    "title": "Aggregate of issuers above 5% of NAV",
+    "severity": "warning",
+    "subject": "Meridian European Equity Fund",
+    "actual": 38.2,
+    "limit": 40.0,
+    "unit": "% NAV",
+    "message": "38.20% is within 1.80 points of the 40.00% limit",
+    "detail": {
+     "contributing_issuers": [
+      {
+       "issuer": "Acme Industrial SA (ACME)",
+       "pct": 12.5
+      },
+      {
+       "issuer": "Beta Pharma NV (BETA)",
+       "pct": 8.0
+      },
+      {
+       "issuer": "Gamma Energy AB (GAMMA)",
+       "pct": 6.5
+      },
+      {
+       "issuer": "Lambda Chemicals NV (LAMBDA)",
+       "pct": 6.0
+      },
+      {
+       "issuer": "Delta Telecom SpA (DELTA)",
+       "pct": 5.2
+      }
+     ],
+     "note": "Art. 52(3) public-body and Art. 52(4) covered bond holdings are excluded by Art. 52(5), as are deposits and OTC derivatives."
+    },
+    "headroom": 1.7999999999999972
+   },
+   {
+    "rule_id": "UCITS.ART83.BORROWING",
+    "reference": "Directive 2009/65/EC Art. 83(2)(b)",
+    "title": "Temporary borrowing",
+    "severity": "warning",
+    "subject": "Meridian European Equity Fund",
+    "actual": 9.5,
+    "limit": 10.0,
+    "unit": "% NAV",
+    "message": "9.50% is within 0.50 points of the 10.00% limit",
+    "detail": {},
+    "headroom": 0.5
+   }
+  ]
+ },
+ "templates": {
+  "eet": {
+   "template": "EET",
+   "version": "1.1.3-illustrative",
+   "rows": 3,
+   "fields": 25,
+   "rules": 10,
+   "counts": {
+    "pass": 11,
+    "warning": 2,
+    "breach": 4,
+    "inconclusive": 0
+   },
+   "valid": false,
+   "report_url": "reports/eet.html",
+   "findings": [
+    {
+     "rule_id": "EET.MIFID.ART6_NO_PREFERENCE_MATCH",
+     "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)",
+     "title": "An Article 6 product cannot satisfy sustainability preferences A or B",
+     "severity": "breach",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A product with no environmental or social characteristics cannot be matched to a client expressing sustainability preference A or B.",
+     "detail": {
+      "expected": "21010_Preference_A_Taxonomy_Share is empty or 21010_Preference_A_Taxonomy_Share is at most 0 and 21020_Preference_B_SFDR_Share is empty or 21020_Preference_B_SFDR_Share is at most 0",
+      "applies_when": "20010_SFDR_Product_Type is ARTICLE_6",
+      "values": {
+       "20010_SFDR_Product_Type": "ARTICLE_6",
+       "21010_Preference_A_Taxonomy_Share": "0.0",
+       "21020_Preference_B_SFDR_Share": "10.0"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EET.PAI.PREFERENCE_C_CONSISTENCY",
+     "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(c)",
+     "title": "MiFID preference C must agree with the PAI consideration flag",
+     "severity": "breach",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A product cannot be offered against a client's preference for products considering principal adverse impacts if it does not consider them.",
+     "detail": {
+      "expected": "21030_Preference_C_PAI is N",
+      "applies_when": "20060_PAI_Considered is N",
+      "values": {
+       "20060_PAI_Considered": "N",
+       "21030_Preference_C_PAI": "Y"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EET.SFDR.ART6_NO_SUSTAINABLE_CLAIM",
+     "reference": "Regulation (EU) 2019/2088 Art. 6",
+     "title": "An Article 6 product must not commit to a sustainable-investment share",
+     "severity": "breach",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A product that makes no sustainability claim cannot commit to a minimum sustainable-investment share. Either reclassify it as Article 8 or clear the field.",
+     "detail": {
+      "expected": "20020_Sustainable_Investment_Minimum_Share is empty or 20020_Sustainable_Investment_Minimum_Share is at most 0",
+      "applies_when": "20010_SFDR_Product_Type is ARTICLE_6",
+      "values": {
+       "20010_SFDR_Product_Type": "ARTICLE_6",
+       "20020_Sustainable_Investment_Minimum_Share": "10.0"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EET.TAXONOMY.SUBSET_OF_SUSTAINABLE",
+     "reference": "Regulation (EU) 2020/852 Art. 3; Regulation (EU) 2019/2088 Art. 2(17)",
+     "title": "Taxonomy-aligned investments are a subset of sustainable investments",
+     "severity": "breach",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "The taxonomy-aligned share cannot exceed the sustainable-investment share, because every taxonomy-aligned investment is by definition a sustainable investment.",
+     "detail": {
+      "expected": "20030_Taxonomy_Aligned_Minimum_Share is at most the value of 20020_Sustainable_Investment_Minimum_Share",
+      "applies_when": "20030_Taxonomy_Aligned_Minimum_Share is populated and 20020_Sustainable_Investment_Minimum_Share is populated",
+      "values": {
+       "20030_Taxonomy_Aligned_Minimum_Share": "72.0",
+       "20020_Sustainable_Investment_Minimum_Share": "60.0"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EET.PAI.COVERAGE_PLAUSIBILITY",
+     "reference": "Delegated Regulation (EU) 2022/1288 Art. 7",
+     "title": "PAI coverage should be high enough for the figures to mean something",
+     "severity": "warning",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "Below roughly half the portfolio, aggregated PAI indicators say more about data gaps than about the holdings. Disclose the coverage ratio alongside the indicators.",
+     "detail": {
+      "expected": "22900_PAI_Coverage_Ratio is at least 50",
+      "applies_when": "20060_PAI_Considered is Y",
+      "values": {
+       "20060_PAI_Considered": "Y",
+       "22900_PAI_Coverage_Ratio": "46.0"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EET.PAI.MANDATORY_INDICATOR_COUNT",
+     "reference": "Delegated Regulation (EU) 2022/1288 Annex I Table 1",
+     "title": "A product that considers PAIs reports the fourteen mandatory indicators",
+     "severity": "warning",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "Table 1 of Annex I lists fourteen indicators that always apply to investments in investee companies. Reporting fewer suggests an incomplete data set rather than a different methodology.",
+     "detail": {
+      "expected": "20070_PAI_Mandatory_Indicators_Covered is at least 14",
+      "applies_when": "20060_PAI_Considered is Y",
+      "values": {
+       "20070_PAI_Mandatory_Indicators_Covered": "9",
+       "20060_PAI_Considered": "Y"
+      }
+     },
+     "headroom": null
+    }
+   ]
+  },
+  "emt": {
+   "template": "EMT",
+   "version": "4.1-illustrative",
+   "rows": 3,
+   "fields": 36,
+   "rules": 10,
+   "counts": {
+    "pass": 19,
+    "warning": 3,
+    "breach": 3,
+    "inconclusive": 0
+   },
+   "valid": false,
+   "report_url": "reports/emt.html",
+   "findings": [
+    {
+     "rule_id": "EMT.COST.TOTAL_COVERS_COMPONENTS",
+     "reference": "Delegated Regulation (EU) 2017/565 Art. 50(2)",
+     "title": "The total cost ratio must be at least the sum of its recurring components",
+     "severity": "breach",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "The aggregated cost figure given to the client must not be lower than the ongoing cost component it contains.",
+     "detail": {
+      "expected": "09060_Total_Cost_Ratio is at least the value of 09030_Ongoing_Cost",
+      "applies_when": "09060_Total_Cost_Ratio is populated and 09030_Ongoing_Cost is populated and 09040_Transaction_Cost is populated",
+      "values": {
+       "09060_Total_Cost_Ratio": "1.30",
+       "09030_Ongoing_Cost": "1.40",
+       "09040_Transaction_Cost": "0.26"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EMT.TM.DISTRIBUTION_STRATEGY_REQUIRED",
+     "reference": "ESMA35-43-620 para. 18(f)",
+     "title": "At least one distribution strategy must be permitted",
+     "severity": "breach",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A product with no permitted distribution channel cannot reach a client.",
+     "detail": {
+      "expected": "07010_Distribution_Execution_Only is Y or 07020_Distribution_Appropriateness is Y or 07030_Distribution_Investment_Advice is Y or 07040_Distribution_Portfolio_Management is Y",
+      "applies_when": "always",
+      "values": {
+       "07040_Distribution_Portfolio_Management": "N",
+       "07030_Distribution_Investment_Advice": "N",
+       "07010_Distribution_Execution_Only": "N",
+       "07020_Distribution_Appropriateness": "N"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EMT.TM.LOSS_BEARING_CONTRADICTION",
+     "reference": "ESMA35-43-620 para. 18(c)",
+     "title": "A capital-protected and a loss-beyond-capital target market are mutually exclusive",
+     "severity": "breach",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A product cannot simultaneously suit an investor who can bear no loss of capital and one who can lose more than the amount invested.",
+     "detail": {
+      "expected": "04040_Loss_Bearing_Beyond_Capital is N",
+      "applies_when": "04010_Loss_Bearing_No_Capital_Loss is Y",
+      "values": {
+       "04040_Loss_Bearing_Beyond_Capital": "Y",
+       "04010_Loss_Bearing_No_Capital_Loss": "Y"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EMT.RISK.PRIIPS_METHODOLOGY_EXPECTED",
+     "reference": "Delegated Regulation (EU) 2017/653 Annex II",
+     "title": "A retail product should quote the PRIIPs summary risk indicator",
+     "severity": "warning",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A PRIIP offered to retail clients carries a KID, so the risk figure shared with distributors should be the PRIIPs SRI rather than the legacy UCITS SRRI or an internal scale.",
+     "detail": {
+      "expected": "05020_Risk_Tolerance_Methodology is PRIIPS_SRI",
+      "applies_when": "02010_Investor_Type_Retail is Y",
+      "values": {
+       "05020_Risk_Tolerance_Methodology": "UCITS_SRRI",
+       "02010_Investor_Type_Retail": "Y"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EMT.TM.EXECUTION_ONLY_NEEDS_BASIC_KNOWLEDGE",
+     "reference": "Directive 2014/65/EU Art. 25(4)",
+     "title": "Execution-only distribution implies the product suits basic knowledge",
+     "severity": "warning",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "Execution-only sales involve no appropriateness test, so a product sold that way should not require more than basic knowledge.",
+     "detail": {
+      "expected": "03010_Knowledge_Basic is Y",
+      "applies_when": "07010_Distribution_Execution_Only is Y",
+      "values": {
+       "03010_Knowledge_Basic": "N",
+       "07010_Distribution_Execution_Only": "Y"
+      }
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "EMT.TM.HIGH_RISK_NOT_FOR_CAPITAL_PRESERVATION",
+     "reference": "ESMA35-43-620 para. 18(e)",
+     "title": "A high risk indicator is inconsistent with a capital-preservation objective",
+     "severity": "warning",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "A product in risk class 5 or above should not be presented as meeting a capital-preservation objective.",
+     "detail": {
+      "expected": "06010_Objective_Preservation is N",
+      "applies_when": "05010_Risk_Tolerance_Indicator is at least 5",
+      "values": {
+       "06010_Objective_Preservation": "Y",
+       "05010_Risk_Tolerance_Indicator": "6"
+      }
+     },
+     "headroom": null
+    }
+   ]
+  },
+  "reconciliation": {
+   "counts": {
+    "pass": 7,
+    "warning": 0,
+    "breach": 2,
+    "inconclusive": 0
+   },
+   "report_url": "reports/reconciliation.html",
+   "findings": [
+    {
+     "rule_id": "XTEMPLATE.21010",
+     "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(a)",
+     "title": "Sustainability preference A differs between the EET and the EMT",
+     "severity": "breach",
+     "subject": "LU7654321CD1",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "EET reports 72.0 but the EMT reports 55.0.",
+     "detail": {
+      "eet_field": "21010_Preference_A_Taxonomy_Share",
+      "emt_field": "10010_Preference_A_Taxonomy_Share"
+     },
+     "headroom": null
+    },
+    {
+     "rule_id": "XTEMPLATE.21030",
+     "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(c)",
+     "title": "Principal adverse impact flag differs between the EET and the EMT",
+     "severity": "breach",
+     "subject": "LU2468013EF2",
+     "actual": null,
+     "limit": null,
+     "unit": "% NAV",
+     "message": "EET reports Y but the EMT reports N.",
+     "detail": {
+      "eet_field": "21030_Preference_C_PAI",
+      "emt_field": "10030_Preference_C_PAI"
+     },
+     "headroom": null
+    }
+   ]
+  },
+  "eet_rows": [
+   {
+    "00010_Portfolio_Identifying_Data_Type": "ISIN",
+    "00020_Portfolio_Identifying_Data": "LU1234567AB9",
+    "00030_Portfolio_Name": "Meridian European Equity Fund A EUR Acc",
+    "00040_Financial_Instrument_Currency": "EUR",
+    "00050_Reporting_Date": "2026-09-30",
+    "00060_Manufacturer_LEI": "5493001KJTIIGC8Y1R12",
+    "20010_SFDR_Product_Type": "ARTICLE_8",
+    "20020_Sustainable_Investment_Minimum_Share": "25.0",
+    "20030_Taxonomy_Aligned_Minimum_Share": "8.0",
+    "20040_Environmental_Characteristics": "true",
+    "20050_Social_Characteristics": "true",
+    "20060_PAI_Considered": "Y",
+    "20070_PAI_Mandatory_Indicators_Covered": "14",
+    "21010_Preference_A_Taxonomy_Share": "8.0",
+    "21020_Preference_B_SFDR_Share": "25.0",
+    "21030_Preference_C_PAI": "Y",
+    "22010_PAI_1_GHG_Scope_1": "14250.5",
+    "22020_PAI_2_Carbon_Footprint": "61.4",
+    "22040_PAI_4_Fossil_Fuel_Share": "2.1",
+    "22100_PAI_10_UNGC_OECD_Violations_Share": "0.0",
+    "22130_PAI_13_Board_Gender_Diversity": "37.8",
+    "22900_PAI_Coverage_Ratio": "91.2",
+    "23010_Taxonomy_Aligned_Turnover": "8.0",
+    "23020_Taxonomy_Aligned_CapEx": "11.4",
+    "23030_Taxonomy_Aligned_OpEx": "6.2"
+   },
+   {
+    "00010_Portfolio_Identifying_Data_Type": "ISIN",
+    "00020_Portfolio_Identifying_Data": "LU7654321CD1",
+    "00030_Portfolio_Name": "Meridian Climate Transition Fund I EUR Acc",
+    "00040_Financial_Instrument_Currency": "EUR",
+    "00050_Reporting_Date": "2026-09-30",
+    "00060_Manufacturer_LEI": "5493001KJTIIGC8Y1R12",
+    "20010_SFDR_Product_Type": "ARTICLE_9",
+    "20020_Sustainable_Investment_Minimum_Share": "60.0",
+    "20030_Taxonomy_Aligned_Minimum_Share": "72.0",
+    "20040_Environmental_Characteristics": "true",
+    "20050_Social_Characteristics": "false",
+    "20060_PAI_Considered": "Y",
+    "20070_PAI_Mandatory_Indicators_Covered": "9",
+    "21010_Preference_A_Taxonomy_Share": "72.0",
+    "21020_Preference_B_SFDR_Share": "60.0",
+    "21030_Preference_C_PAI": "Y",
+    "22010_PAI_1_GHG_Scope_1": "3180.0",
+    "22020_PAI_2_Carbon_Footprint": "18.7",
+    "22040_PAI_4_Fossil_Fuel_Share": "0.0",
+    "22100_PAI_10_UNGC_OECD_Violations_Share": "0.0",
+    "22130_PAI_13_Board_Gender_Diversity": "41.5",
+    "22900_PAI_Coverage_Ratio": "46.0",
+    "23010_Taxonomy_Aligned_Turnover": "72.0",
+    "23020_Taxonomy_Aligned_CapEx": "78.1",
+    "23030_Taxonomy_Aligned_OpEx": "65.9"
+   },
+   {
+    "00010_Portfolio_Identifying_Data_Type": "ISIN",
+    "00020_Portfolio_Identifying_Data": "LU2468013EF2",
+    "00030_Portfolio_Name": "Meridian Global Bond Fund A EUR Dis",
+    "00040_Financial_Instrument_Currency": "EUR",
+    "00050_Reporting_Date": "2026-09-30",
+    "00060_Manufacturer_LEI": "5493001KJTIIGC8Y1R12",
+    "20010_SFDR_Product_Type": "ARTICLE_6",
+    "20020_Sustainable_Investment_Minimum_Share": "10.0",
+    "20030_Taxonomy_Aligned_Minimum_Share": "",
+    "20040_Environmental_Characteristics": "",
+    "20050_Social_Characteristics": "",
+    "20060_PAI_Considered": "N",
+    "20070_PAI_Mandatory_Indicators_Covered": "",
+    "21010_Preference_A_Taxonomy_Share": "0.0",
+    "21020_Preference_B_SFDR_Share": "10.0",
+    "21030_Preference_C_PAI": "Y",
+    "22010_PAI_1_GHG_Scope_1": "",
+    "22020_PAI_2_Carbon_Footprint": "",
+    "22040_PAI_4_Fossil_Fuel_Share": "",
+    "22100_PAI_10_UNGC_OECD_Violations_Share": "",
+    "22130_PAI_13_Board_Gender_Diversity": "",
+    "22900_PAI_Coverage_Ratio": "",
+    "23010_Taxonomy_Aligned_Turnover": "",
+    "23020_Taxonomy_Aligned_CapEx": "",
+    "23030_Taxonomy_Aligned_OpEx": ""
+   }
+  ],
+  "emt_rows": [
+   {
+    "00010_Financial_Instrument_Identifier": "LU1234567AB9",
+    "00020_Financial_Instrument_Name": "Meridian European Equity Fund A EUR Acc",
+    "00030_Reporting_Date": "2026-09-30",
+    "00040_Manufacturer_LEI": "5493001KJTIIGC8Y1R12",
+    "00050_Financial_Instrument_Currency": "EUR",
+    "02010_Investor_Type_Retail": "Y",
+    "02020_Investor_Type_Professional": "Y",
+    "02030_Investor_Type_Eligible_Counterparty": "N",
+    "03010_Knowledge_Basic": "Y",
+    "03020_Knowledge_Informed": "Y",
+    "03030_Knowledge_Advanced": "Y",
+    "04010_Loss_Bearing_No_Capital_Loss": "N",
+    "04020_Loss_Bearing_Limited_Capital_Loss": "N",
+    "04030_Loss_Bearing_No_Capital_Guarantee": "Y",
+    "04040_Loss_Bearing_Beyond_Capital": "N",
+    "05010_Risk_Tolerance_Indicator": "4",
+    "05020_Risk_Tolerance_Methodology": "PRIIPS_SRI",
+    "06010_Objective_Preservation": "N",
+    "06020_Objective_Growth": "Y",
+    "06030_Objective_Income": "N",
+    "06040_Objective_Hedging": "N",
+    "06050_Recommended_Holding_Period": "5",
+    "07010_Distribution_Execution_Only": "Y",
+    "07020_Distribution_Appropriateness": "Y",
+    "07030_Distribution_Investment_Advice": "Y",
+    "07040_Distribution_Portfolio_Management": "Y",
+    "08010_Negative_Target_Market": "Investors with a holding horizon below three years",
+    "09010_One_Off_Cost_Entry": "0.00",
+    "09020_One_Off_Cost_Exit": "0.00",
+    "09030_Ongoing_Cost": "1.05",
+    "09040_Transaction_Cost": "0.18",
+    "09050_Incidental_Cost_Performance_Fee": "0.00",
+    "09060_Total_Cost_Ratio": "1.23",
+    "10010_Preference_A_Taxonomy_Share": "8.0",
+    "10020_Preference_B_SFDR_Share": "25.0",
+    "10030_Preference_C_PAI": "Y"
+   },
+   {
+    "00010_Financial_Instrument_Identifier": "LU7654321CD1",
+    "00020_Financial_Instrument_Name": "Meridian Climate Transition Fund I EUR Acc",
+    "00030_Reporting_Date": "2026-09-30",
+    "00040_Manufacturer_LEI": "5493001KJTIIGC8Y1R12",
+    "00050_Financial_Instrument_Currency": "EUR",
+    "02010_Investor_Type_Retail": "Y",
+    "02020_Investor_Type_Professional": "Y",
+    "02030_Investor_Type_Eligible_Counterparty": "N",
+    "03010_Knowledge_Basic": "N",
+    "03020_Knowledge_Informed": "Y",
+    "03030_Knowledge_Advanced": "Y",
+    "04010_Loss_Bearing_No_Capital_Loss": "N",
+    "04020_Loss_Bearing_Limited_Capital_Loss": "N",
+    "04030_Loss_Bearing_No_Capital_Guarantee": "Y",
+    "04040_Loss_Bearing_Beyond_Capital": "N",
+    "05010_Risk_Tolerance_Indicator": "6",
+    "05020_Risk_Tolerance_Methodology": "PRIIPS_SRI",
+    "06010_Objective_Preservation": "Y",
+    "06020_Objective_Growth": "Y",
+    "06030_Objective_Income": "N",
+    "06040_Objective_Hedging": "N",
+    "06050_Recommended_Holding_Period": "7",
+    "07010_Distribution_Execution_Only": "Y",
+    "07020_Distribution_Appropriateness": "Y",
+    "07030_Distribution_Investment_Advice": "Y",
+    "07040_Distribution_Portfolio_Management": "Y",
+    "08010_Negative_Target_Market": "",
+    "09010_One_Off_Cost_Entry": "0.00",
+    "09020_One_Off_Cost_Exit": "0.00",
+    "09030_Ongoing_Cost": "1.40",
+    "09040_Transaction_Cost": "0.26",
+    "09050_Incidental_Cost_Performance_Fee": "0.15",
+    "09060_Total_Cost_Ratio": "1.30",
+    "10010_Preference_A_Taxonomy_Share": "55.0",
+    "10020_Preference_B_SFDR_Share": "60.0",
+    "10030_Preference_C_PAI": "Y"
+   },
+   {
+    "00010_Financial_Instrument_Identifier": "LU2468013EF2",
+    "00020_Financial_Instrument_Name": "Meridian Global Bond Fund A EUR Dis",
+    "00030_Reporting_Date": "2026-09-30",
+    "00040_Manufacturer_LEI": "5493001KJTIIGC8Y1R12",
+    "00050_Financial_Instrument_Currency": "EUR",
+    "02010_Investor_Type_Retail": "Y",
+    "02020_Investor_Type_Professional": "Y",
+    "02030_Investor_Type_Eligible_Counterparty": "N",
+    "03010_Knowledge_Basic": "Y",
+    "03020_Knowledge_Informed": "Y",
+    "03030_Knowledge_Advanced": "Y",
+    "04010_Loss_Bearing_No_Capital_Loss": "Y",
+    "04020_Loss_Bearing_Limited_Capital_Loss": "Y",
+    "04030_Loss_Bearing_No_Capital_Guarantee": "N",
+    "04040_Loss_Bearing_Beyond_Capital": "Y",
+    "05010_Risk_Tolerance_Indicator": "2",
+    "05020_Risk_Tolerance_Methodology": "UCITS_SRRI",
+    "06010_Objective_Preservation": "Y",
+    "06020_Objective_Growth": "N",
+    "06030_Objective_Income": "Y",
+    "06040_Objective_Hedging": "N",
+    "06050_Recommended_Holding_Period": "3",
+    "07010_Distribution_Execution_Only": "N",
+    "07020_Distribution_Appropriateness": "N",
+    "07030_Distribution_Investment_Advice": "N",
+    "07040_Distribution_Portfolio_Management": "N",
+    "08010_Negative_Target_Market": "",
+    "09010_One_Off_Cost_Entry": "0.00",
+    "09020_One_Off_Cost_Exit": "0.00",
+    "09030_Ongoing_Cost": "0.62",
+    "09040_Transaction_Cost": "0.09",
+    "09050_Incidental_Cost_Performance_Fee": "0.00",
+    "09060_Total_Cost_Ratio": "0.71",
+    "10010_Preference_A_Taxonomy_Share": "0.0",
+    "10020_Preference_B_SFDR_Share": "10.0",
+    "10030_Preference_C_PAI": "N"
+   }
+  ]
+ }
+}

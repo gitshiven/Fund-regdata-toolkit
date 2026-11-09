@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>European MiFID Template validation</title><style>
+:root{--ink:#131920;--muted:#616d7e;--line:#dde3eb;--bg:#fff;--panel:#f5f8fc;
+--ok:#1d6b45;--warn:#9a6212;--bad:#9a1f2e;--none:#596273;--accent:#1f4e79}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+--ink:#e7ecf3;--muted:#9aa6b8;--line:#2a3340;--bg:#131a23;--panel:#19222d;
+--ok:#56c08b;--warn:#e0a94b;--bad:#f2798c;--none:#8a95a6;--accent:#7fb3e3}}
+:root[data-theme=dark]{--ink:#e7ecf3;--muted:#9aa6b8;--line:#2a3340;--bg:#131a23;
+--panel:#19222d;--ok:#56c08b;--warn:#e0a94b;--bad:#f2798c;--none:#8a95a6;--accent:#7fb3e3}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 16px;background:var(--bg);color:var(--ink);
+font:15px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+main{max-width:1040px;margin:0 auto}
+h1{font-size:23px;margin:0 0 2px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13.5px;margin:0 0 20px}
+.cards{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.card{flex:1 1 140px;background:var(--panel);border:1px solid var(--line);
+border-radius:9px;padding:13px 15px}
+.card b{display:block;font-size:26px;line-height:1.15;font-variant-numeric:tabular-nums}
+.card span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.card.ok b{color:var(--ok)}.card.warn b{color:var(--warn)}
+.card.bad b{color:var(--bad)}.card.none b{color:var(--none)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:var(--panel);font-weight:600;position:sticky;top:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;
+font-weight:600;white-space:nowrap}
+.badge.ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.badge.warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.badge.bad{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+.badge.none{background:color-mix(in srgb,var(--none) 16%,transparent);color:var(--none)}
+.rule{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11.5px;
+color:var(--muted);display:block;margin-top:2px}
+.msg{color:var(--muted);font-size:12.5px;margin-top:3px}
+.filters{display:flex;gap:8px;margin:0 0 12px;flex-wrap:wrap}
+.filters button{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+border-radius:999px;padding:5px 14px;font:inherit;font-size:12.5px;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.foot{margin-top:26px;color:var(--muted);font-size:12px}
+@media (max-width:640px){th:nth-child(5),td:nth-child(5){display:none}}
+</style></head><body>
+<main>
+  <h1>European MiFID Template validation</h1>
+  <p class="sub">EMT 4.1-illustrative - 3 share classes &middot; 
+     25 rules evaluated: 19 pass, 3 warning, 3 breach, 0 inconclusive</p>
+  <div class="cards"><div class="card ok"><b>19</b><span>Pass</span></div><div class="card warn"><b>3</b><span>Warning</span></div><div class="card bad"><b>3</b><span>Breach</span></div><div class="card none"><b>0</b><span>No data</span></div></div>
+  <div class="filters">
+    <button data-sev="all" aria-pressed="true">All</button>
+    <button data-sev="breach" aria-pressed="false">Breaches</button>
+    <button data-sev="warning" aria-pressed="false">Warnings</button>
+    <button data-sev="inconclusive" aria-pressed="false">No data</button>
+    <button data-sev="pass" aria-pressed="false">Passes</button>
+  </div>
+  <table><thead><tr>
+    <th>Outcome</th><th>Subject</th><th>Rule</th>
+    <th class="num">Actual</th><th class="num">Limit</th><th class="num">Headroom</th>
+  </tr></thead><tbody><tr data-sev="breach"><td><span class="badge bad">Breach</span></td><td>LU7654321CD1</td><td>The total cost ratio must be at least the sum of its recurring components<span class="rule">EMT.COST.TOTAL_COVERS_COMPONENTS &middot; Delegated Regulation (EU) 2017/565 Art. 50(2)</span><div class="msg">The aggregated cost figure given to the client must not be lower than the ongoing cost component it contains.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="breach"><td><span class="badge bad">Breach</span></td><td>LU2468013EF2</td><td>At least one distribution strategy must be permitted<span class="rule">EMT.TM.DISTRIBUTION_STRATEGY_REQUIRED &middot; ESMA35-43-620 para. 18(f)</span><div class="msg">A product with no permitted distribution channel cannot reach a client.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="breach"><td><span class="badge bad">Breach</span></td><td>LU2468013EF2</td><td>A capital-protected and a loss-beyond-capital target market are mutually exclusive<span class="rule">EMT.TM.LOSS_BEARING_CONTRADICTION &middot; ESMA35-43-620 para. 18(c)</span><div class="msg">A product cannot simultaneously suit an investor who can bear no loss of capital and one who can lose more than the amount invested.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="warning"><td><span class="badge warn">Warning</span></td><td>LU2468013EF2</td><td>A retail product should quote the PRIIPs summary risk indicator<span class="rule">EMT.RISK.PRIIPS_METHODOLOGY_EXPECTED &middot; Delegated Regulation (EU) 2017/653 Annex II</span><div class="msg">A PRIIP offered to retail clients carries a KID, so the risk figure shared with distributors should be the PRIIPs SRI rather than the legacy UCITS SRRI or an internal scale.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="warning"><td><span class="badge warn">Warning</span></td><td>LU7654321CD1</td><td>Execution-only distribution implies the product suits basic knowledge<span class="rule">EMT.TM.EXECUTION_ONLY_NEEDS_BASIC_KNOWLEDGE &middot; Directive 2014/65/EU Art. 25(4)</span><div class="msg">Execution-only sales involve no appropriateness test, so a product sold that way should not require more than basic knowledge.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="warning"><td><span class="badge warn">Warning</span></td><td>LU7654321CD1</td><td>A high risk indicator is inconsistent with a capital-preservation objective<span class="rule">EMT.TM.HIGH_RISK_NOT_FOR_CAPITAL_PRESERVATION &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">A product in risk class 5 or above should not be presented as meeting a capital-preservation objective.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>The total cost ratio must be at least the sum of its recurring components<span class="rule">EMT.COST.TOTAL_COVERS_COMPONENTS &middot; Delegated Regulation (EU) 2017/565 Art. 50(2)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU2468013EF2</td><td>The total cost ratio must be at least the sum of its recurring components<span class="rule">EMT.COST.TOTAL_COVERS_COMPONENTS &middot; Delegated Regulation (EU) 2017/565 Art. 50(2)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>A retail product should quote the PRIIPs summary risk indicator<span class="rule">EMT.RISK.PRIIPS_METHODOLOGY_EXPECTED &middot; Delegated Regulation (EU) 2017/653 Annex II</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU7654321CD1</td><td>A retail product should quote the PRIIPs summary risk indicator<span class="rule">EMT.RISK.PRIIPS_METHODOLOGY_EXPECTED &middot; Delegated Regulation (EU) 2017/653 Annex II</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>At least one distribution strategy must be permitted<span class="rule">EMT.TM.DISTRIBUTION_STRATEGY_REQUIRED &middot; ESMA35-43-620 para. 18(f)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU7654321CD1</td><td>At least one distribution strategy must be permitted<span class="rule">EMT.TM.DISTRIBUTION_STRATEGY_REQUIRED &middot; ESMA35-43-620 para. 18(f)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>Execution-only distribution implies the product suits basic knowledge<span class="rule">EMT.TM.EXECUTION_ONLY_NEEDS_BASIC_KNOWLEDGE &middot; Directive 2014/65/EU Art. 25(4)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>A recommended holding period must be stated<span class="rule">EMT.TM.HOLDING_PERIOD_POSITIVE &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU7654321CD1</td><td>A recommended holding period must be stated<span class="rule">EMT.TM.HOLDING_PERIOD_POSITIVE &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU2468013EF2</td><td>A recommended holding period must be stated<span class="rule">EMT.TM.HOLDING_PERIOD_POSITIVE &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>At least one investor type must be in the target market<span class="rule">EMT.TM.INVESTOR_TYPE_REQUIRED &middot; Directive 2014/65/EU Art. 16(3); ESMA35-43-620 para. 18(a)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU7654321CD1</td><td>At least one investor type must be in the target market<span class="rule">EMT.TM.INVESTOR_TYPE_REQUIRED &middot; Directive 2014/65/EU Art. 16(3); ESMA35-43-620 para. 18(a)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU2468013EF2</td><td>At least one investor type must be in the target market<span class="rule">EMT.TM.INVESTOR_TYPE_REQUIRED &middot; Directive 2014/65/EU Art. 16(3); ESMA35-43-620 para. 18(a)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>At least one knowledge and experience level must be identified<span class="rule">EMT.TM.KNOWLEDGE_REQUIRED &middot; ESMA35-43-620 para. 18(b)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU7654321CD1</td><td>At least one knowledge and experience level must be identified<span class="rule">EMT.TM.KNOWLEDGE_REQUIRED &middot; ESMA35-43-620 para. 18(b)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU2468013EF2</td><td>At least one knowledge and experience level must be identified<span class="rule">EMT.TM.KNOWLEDGE_REQUIRED &middot; ESMA35-43-620 para. 18(b)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU1234567AB9</td><td>At least one client objective must be identified<span class="rule">EMT.TM.OBJECTIVE_REQUIRED &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU7654321CD1</td><td>At least one client objective must be identified<span class="rule">EMT.TM.OBJECTIVE_REQUIRED &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr data-sev="pass"><td><span class="badge ok">Pass</span></td><td>LU2468013EF2</td><td>At least one client objective must be identified<span class="rule">EMT.TM.OBJECTIVE_REQUIRED &middot; ESMA35-43-620 para. 18(e)</span><div class="msg">Condition satisfied.</div></td><td class="num"></td><td class="num"></td><td class="num"></td></tr></tbody></table>
+  <p class="foot">Figures in the unit of each rule.
+     Generated 2026-11-09 22:31 by fund-regdata-toolkit.
+     A demonstration of the methodology, not a regulatory filing.</p>
+</main>
+<script>
+const buttons=document.querySelectorAll('.filters button');
+buttons.forEach(b=>b.addEventListener('click',()=>{
+  const want=b.dataset.sev;
+  buttons.forEach(o=>o.setAttribute('aria-pressed',String(o===b)));
+  document.querySelectorAll('tbody tr').forEach(r=>{
+    r.hidden = want!=='all' && r.dataset.sev!==want;
+  });
+}));
+</script></body></html>

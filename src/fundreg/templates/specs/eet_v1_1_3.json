@@ -1,0 +1,367 @@
+{
+  "template": "EET",
+  "version": "1.1.3-illustrative",
+  "title": "European ESG Template",
+  "key_field": "00020_Portfolio_Identifying_Data",
+  "description": "Illustrative reconstruction of the European ESG Template, the file a fund manufacturer sends to distributors so they can meet their SFDR disclosure duties and assess a client's MiFID sustainability preferences. Field codes follow the EET numbering convention and the semantics follow Regulation (EU) 2019/2088 (SFDR), its RTS (EU) 2022/1288, Regulation (EU) 2020/852 (Taxonomy) and Delegated Regulation (EU) 2021/1253. It is a teaching subset, not the official FinDatEx catalogue; use the published FinDatEx template for production reporting.",
+  "fields": [
+    {
+      "code": "00010_Portfolio_Identifying_Data_Type",
+      "name": "Portfolio identifying data type",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["ISIN", "OTHER"],
+      "section": "Identification"
+    },
+    {
+      "code": "00020_Portfolio_Identifying_Data",
+      "name": "Portfolio identifier",
+      "datatype": "string",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00030_Portfolio_Name",
+      "name": "Portfolio name",
+      "datatype": "string",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00040_Financial_Instrument_Currency",
+      "name": "Share class currency",
+      "datatype": "currency",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00050_Reporting_Date",
+      "name": "Reporting reference date",
+      "datatype": "date",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "00060_Manufacturer_LEI",
+      "name": "Manufacturer legal entity identifier",
+      "datatype": "lei",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "20010_SFDR_Product_Type",
+      "name": "SFDR product classification",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["ARTICLE_6", "ARTICLE_8", "ARTICLE_9"],
+      "section": "SFDR classification",
+      "reference": "Regulation (EU) 2019/2088 Arts. 6, 8 and 9",
+      "description": "Article 6 products make no sustainability claim, Article 8 products promote environmental or social characteristics, Article 9 products have sustainable investment as their objective."
+    },
+    {
+      "code": "20020_Sustainable_Investment_Minimum_Share",
+      "name": "Minimum share of sustainable investments",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "maximum": 100,
+      "required_when": {"field": "20010_SFDR_Product_Type", "in": ["ARTICLE_8", "ARTICLE_9"]},
+      "section": "SFDR classification",
+      "reference": "Regulation (EU) 2019/2088 Art. 2(17)"
+    },
+    {
+      "code": "20030_Taxonomy_Aligned_Minimum_Share",
+      "name": "Minimum share of taxonomy-aligned investments",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "maximum": 100,
+      "required_when": {"field": "20010_SFDR_Product_Type", "in": ["ARTICLE_8", "ARTICLE_9"]},
+      "section": "SFDR classification",
+      "reference": "Regulation (EU) 2020/852 Art. 5 and Art. 6"
+    },
+    {
+      "code": "20040_Environmental_Characteristics",
+      "name": "Promotes environmental characteristics",
+      "datatype": "boolean",
+      "requirement": "conditional",
+      "required_when": {"field": "20010_SFDR_Product_Type", "in": ["ARTICLE_8", "ARTICLE_9"]},
+      "section": "SFDR classification"
+    },
+    {
+      "code": "20050_Social_Characteristics",
+      "name": "Promotes social characteristics",
+      "datatype": "boolean",
+      "requirement": "conditional",
+      "required_when": {"field": "20010_SFDR_Product_Type", "in": ["ARTICLE_8", "ARTICLE_9"]},
+      "section": "SFDR classification"
+    },
+    {
+      "code": "20060_PAI_Considered",
+      "name": "Principal adverse impacts considered",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "Principal adverse impacts",
+      "reference": "Regulation (EU) 2019/2088 Art. 7"
+    },
+    {
+      "code": "20070_PAI_Mandatory_Indicators_Covered",
+      "name": "Mandatory PAI indicators covered",
+      "datatype": "integer",
+      "requirement": "conditional",
+      "minimum": 0,
+      "maximum": 18,
+      "required_when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "section": "Principal adverse impacts",
+      "reference": "Delegated Regulation (EU) 2022/1288 Annex I Table 1"
+    },
+    {
+      "code": "21010_Preference_A_Taxonomy_Share",
+      "name": "MiFID preference A: minimum taxonomy-aligned proportion",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "MiFID sustainability preferences",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(a)"
+    },
+    {
+      "code": "21020_Preference_B_SFDR_Share",
+      "name": "MiFID preference B: minimum sustainable-investment proportion",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "MiFID sustainability preferences",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(b)"
+    },
+    {
+      "code": "21030_Preference_C_PAI",
+      "name": "MiFID preference C: principal adverse impacts considered",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Y", "N"],
+      "section": "MiFID sustainability preferences",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(c)"
+    },
+    {
+      "code": "22010_PAI_1_GHG_Scope_1",
+      "name": "PAI 1: scope 1 GHG emissions (tCO2e)",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "required_when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "section": "PAI indicator values"
+    },
+    {
+      "code": "22020_PAI_2_Carbon_Footprint",
+      "name": "PAI 2: carbon footprint (tCO2e per EUR million invested)",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "required_when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "section": "PAI indicator values"
+    },
+    {
+      "code": "22040_PAI_4_Fossil_Fuel_Share",
+      "name": "PAI 4: share of investments in fossil fuel companies (%)",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "maximum": 100,
+      "required_when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "section": "PAI indicator values"
+    },
+    {
+      "code": "22100_PAI_10_UNGC_OECD_Violations_Share",
+      "name": "PAI 10: share of investments in companies violating UNGC or OECD guidelines (%)",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "maximum": 100,
+      "required_when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "section": "PAI indicator values"
+    },
+    {
+      "code": "22130_PAI_13_Board_Gender_Diversity",
+      "name": "PAI 13: average ratio of female to total board members (%)",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "PAI indicator values"
+    },
+    {
+      "code": "22900_PAI_Coverage_Ratio",
+      "name": "Share of the portfolio for which PAI data is available (%)",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "maximum": 100,
+      "required_when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "section": "PAI indicator values"
+    },
+    {
+      "code": "23010_Taxonomy_Aligned_Turnover",
+      "name": "Taxonomy alignment measured by turnover (%)",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "EU Taxonomy",
+      "reference": "Delegated Regulation (EU) 2021/2178"
+    },
+    {
+      "code": "23020_Taxonomy_Aligned_CapEx",
+      "name": "Taxonomy alignment measured by capital expenditure (%)",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "EU Taxonomy"
+    },
+    {
+      "code": "23030_Taxonomy_Aligned_OpEx",
+      "name": "Taxonomy alignment measured by operating expenditure (%)",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "maximum": 100,
+      "section": "EU Taxonomy"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "EET.SFDR.ART9_REQUIRES_SUSTAINABLE_INVESTMENTS",
+      "title": "An Article 9 product must hold sustainable investments",
+      "reference": "Regulation (EU) 2019/2088 Art. 9",
+      "when": {"field": "20010_SFDR_Product_Type", "equals": "ARTICLE_9"},
+      "then": {"field": "20020_Sustainable_Investment_Minimum_Share", "gt": 0},
+      "message": "An Article 9 product has sustainable investment as its objective, so a minimum sustainable-investment share above zero is required."
+    },
+    {
+      "rule_id": "EET.SFDR.ART6_NO_SUSTAINABLE_CLAIM",
+      "title": "An Article 6 product must not commit to a sustainable-investment share",
+      "reference": "Regulation (EU) 2019/2088 Art. 6",
+      "when": {"field": "20010_SFDR_Product_Type", "equals": "ARTICLE_6"},
+      "then": {
+        "any": [
+          {"field": "20020_Sustainable_Investment_Minimum_Share", "present": false},
+          {"field": "20020_Sustainable_Investment_Minimum_Share", "lte": 0}
+        ]
+      },
+      "message": "A product that makes no sustainability claim cannot commit to a minimum sustainable-investment share. Either reclassify it as Article 8 or clear the field."
+    },
+    {
+      "rule_id": "EET.TAXONOMY.SUBSET_OF_SUSTAINABLE",
+      "title": "Taxonomy-aligned investments are a subset of sustainable investments",
+      "reference": "Regulation (EU) 2020/852 Art. 3; Regulation (EU) 2019/2088 Art. 2(17)",
+      "when": {
+        "all": [
+          {"field": "20030_Taxonomy_Aligned_Minimum_Share", "present": true},
+          {"field": "20020_Sustainable_Investment_Minimum_Share", "present": true}
+        ]
+      },
+      "then": {
+        "field": "20030_Taxonomy_Aligned_Minimum_Share",
+        "lte_field": "20020_Sustainable_Investment_Minimum_Share"
+      },
+      "message": "The taxonomy-aligned share cannot exceed the sustainable-investment share, because every taxonomy-aligned investment is by definition a sustainable investment."
+    },
+    {
+      "rule_id": "EET.SFDR.ART8_NEEDS_A_CHARACTERISTIC",
+      "title": "An Article 8 or 9 product must promote at least one characteristic",
+      "reference": "Regulation (EU) 2019/2088 Art. 8(1)",
+      "when": {"field": "20010_SFDR_Product_Type", "in": ["ARTICLE_8", "ARTICLE_9"]},
+      "then": {
+        "any": [
+          {"field": "20040_Environmental_Characteristics", "in": ["true", "TRUE", "Y", "yes", "1"]},
+          {"field": "20050_Social_Characteristics", "in": ["true", "TRUE", "Y", "yes", "1"]}
+        ]
+      },
+      "message": "Article 8 and 9 products must promote environmental characteristics, social characteristics, or both."
+    },
+    {
+      "rule_id": "EET.PAI.MANDATORY_INDICATOR_COUNT",
+      "title": "A product that considers PAIs reports the fourteen mandatory indicators",
+      "reference": "Delegated Regulation (EU) 2022/1288 Annex I Table 1",
+      "severity": "warning",
+      "when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "then": {"field": "20070_PAI_Mandatory_Indicators_Covered", "gte": 14},
+      "message": "Table 1 of Annex I lists fourteen indicators that always apply to investments in investee companies. Reporting fewer suggests an incomplete data set rather than a different methodology."
+    },
+    {
+      "rule_id": "EET.PAI.PREFERENCE_C_CONSISTENCY",
+      "title": "MiFID preference C must agree with the PAI consideration flag",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(c)",
+      "when": {"field": "20060_PAI_Considered", "equals": "N"},
+      "then": {"field": "21030_Preference_C_PAI", "equals": "N"},
+      "message": "A product cannot be offered against a client's preference for products considering principal adverse impacts if it does not consider them."
+    },
+    {
+      "rule_id": "EET.MIFID.PREFERENCE_A_WITHIN_TAXONOMY_SHARE",
+      "title": "MiFID preference A cannot exceed the committed taxonomy-aligned share",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(a)",
+      "when": {
+        "all": [
+          {"field": "21010_Preference_A_Taxonomy_Share", "gt": 0},
+          {"field": "20030_Taxonomy_Aligned_Minimum_Share", "present": true}
+        ]
+      },
+      "then": {
+        "field": "21010_Preference_A_Taxonomy_Share",
+        "lte_field": "20030_Taxonomy_Aligned_Minimum_Share"
+      },
+      "message": "The proportion advertised to advisers for preference A must be backed by the product's own committed minimum taxonomy-aligned share."
+    },
+    {
+      "rule_id": "EET.MIFID.PREFERENCE_B_WITHIN_SUSTAINABLE_SHARE",
+      "title": "MiFID preference B cannot exceed the committed sustainable-investment share",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)(b)",
+      "when": {
+        "all": [
+          {"field": "21020_Preference_B_SFDR_Share", "gt": 0},
+          {"field": "20020_Sustainable_Investment_Minimum_Share", "present": true}
+        ]
+      },
+      "then": {
+        "field": "21020_Preference_B_SFDR_Share",
+        "lte_field": "20020_Sustainable_Investment_Minimum_Share"
+      },
+      "message": "The proportion advertised to advisers for preference B must be backed by the product's own committed minimum sustainable-investment share."
+    },
+    {
+      "rule_id": "EET.MIFID.ART6_NO_PREFERENCE_MATCH",
+      "title": "An Article 6 product cannot satisfy sustainability preferences A or B",
+      "reference": "Delegated Regulation (EU) 2021/1253 Art. 2(7)",
+      "when": {"field": "20010_SFDR_Product_Type", "equals": "ARTICLE_6"},
+      "then": {
+        "all": [
+          {
+            "any": [
+              {"field": "21010_Preference_A_Taxonomy_Share", "present": false},
+              {"field": "21010_Preference_A_Taxonomy_Share", "lte": 0}
+            ]
+          },
+          {
+            "any": [
+              {"field": "21020_Preference_B_SFDR_Share", "present": false},
+              {"field": "21020_Preference_B_SFDR_Share", "lte": 0}
+            ]
+          }
+        ]
+      },
+      "message": "A product with no environmental or social characteristics cannot be matched to a client expressing sustainability preference A or B."
+    },
+    {
+      "rule_id": "EET.PAI.COVERAGE_PLAUSIBILITY",
+      "title": "PAI coverage should be high enough for the figures to mean something",
+      "severity": "warning",
+      "reference": "Delegated Regulation (EU) 2022/1288 Art. 7",
+      "when": {"field": "20060_PAI_Considered", "equals": "Y"},
+      "then": {"field": "22900_PAI_Coverage_Ratio", "gte": 50},
+      "message": "Below roughly half the portfolio, aggregated PAI indicators say more about data gaps than about the holdings. Disclose the coverage ratio alongside the indicators."
+    }
+  ]
+}
