@@ -91,6 +91,8 @@ dt{color:var(--muted)}dd{margin:0;text-align:right;font-variant-numeric:tabular-
 .bar .zero{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line)}
 .bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
 .note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+tr.muted td{color:var(--muted)}
+tr.muted em{font-style:normal;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
 .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .links a{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:7px 14px;
   text-decoration:none;font-size:13px;background:var(--panel2)}
@@ -111,8 +113,8 @@ footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
   <header>
     <div>
       <h1>Fund Regulatory Data Hub</h1>
-      <p class="tag" id="tagline">UCITS limits, PRIIPs KID figures and EET/EMT validation
-        for a sample UCITS range.</p>
+      <p class="tag" id="tagline">UCITS limits, PRIIPs KID figures, AIFMD Annex IV
+        leverage and EET/EMT validation for a sample fund range.</p>
     </div>
     <button class="theme" id="theme" type="button">Theme</button>
   </header>
@@ -163,9 +165,11 @@ function kpis(d) {
               + Object.values(d.templates.eet.counts).reduce((a, b) => a + b, 0)
               + Object.values(d.templates.emt.counts).reduce((a, b) => a + b, 0)
               + Object.values(d.templates.reconciliation.counts).reduce((a, b) => a + b, 0);
+  const aifmdCounts = (d.aifmd && d.aifmd.counts) || {};
+  const totalRules = rules + Object.values(aifmdCounts).reduce((a, b) => a + b, 0);
   const cards = [
     ['', d.funds.length, 'Share classes', 'with a computed KID'],
-    ['', rules, 'Rules evaluated', 'across four engines'],
+    ['', totalRules, 'Rules evaluated', 'across five engines'],
     [breaches ? 'bad' : 'ok', breaches, 'Breaches', 'hard limits exceeded'],
     [warnings ? 'warn' : 'ok', warnings, 'Warnings', 'inside the limit, close to it'],
   ];
@@ -341,6 +345,72 @@ function ucitsSection(u) {
   </div>`;
 }
 
+function leverageBreakdown(result, ccy) {
+  const rows = result.components.map(c =>
+    `<tr><td>${esc(c.label)}</td><td class="num">${money(c.amount, ccy)}</td></tr>`);
+  const out = result.excluded.map(c =>
+    `<tr class="muted"><td>${esc(c.label)} <em>excluded</em></td>
+     <td class="num">(${money(c.amount, ccy)})</td></tr>`);
+  return `<table><thead><tr><th>${esc(result.method)} method</th>
+    <th class="num">${result.ratio.toFixed(4)}&times; NAV</th></tr></thead>
+    <tbody>${rows.join('')}${out.join('')}
+    <tr><td><strong>Exposure</strong></td>
+        <td class="num"><strong>${money(result.exposure, ccy)}</strong></td></tr>
+    </tbody></table>`;
+}
+
+function aifmdSection(a, ccy) {
+  const lev = a.leverage;
+  const ob = a.obligation;
+  return `<h2>AIFMD Annex IV
+    <span class="hint">Directive 2011/61/EU Art. 24, Regulation (EU) 231/2013 Arts. 7, 8 and 110</span></h2>
+  <div class="panel">
+    <div class="cols">
+      <div>${defList([
+        ['AIF', esc(a.aif.name)],
+        ['Net asset value', money(a.leverage.gross.nav, ccy)],
+        ['Assets under management', money(a.aum, ccy)],
+        ['Reporting frequency', esc(ob.frequency)],
+        ['Reporting period', esc(a.record.ReportingPeriodType + ' ' + a.record.ReportingPeriodYear)],
+        ['Annex IV content type', esc(a.record.AIFContentType)],
+      ])}
+      <p class="note">${esc(ob.rationale)} (${esc(ob.reference)})</p></div>
+      <div>${defList([
+        ['Leverage, gross method', lev.gross.ratio.toFixed(4) + '&times;'],
+        ['Leverage, commitment method', lev.commitment.ratio.toFixed(4) + '&times;'],
+        ['Substantially leveraged', lev.substantially_leveraged
+          ? '<span class="badge bad">Yes</span>' : '<span class="badge ok">No</span>'],
+        ['UCITS global exposure', pct(lev.ucits_global_exposure_pct)],
+      ])}
+      <p class="note">The UCITS figure counts only the incremental exposure derivatives
+        create, so it reads 0% for an unleveraged book. The AIFMD ratios count the whole
+        portfolio, where 1.0&times; means unleveraged. The two are not comparable, and
+        quoting one for the other is a common reporting error.</p></div>
+    </div>
+
+    <h3>How the two AIFMD measures are built</h3>
+    <div class="cols">
+      <div>${leverageBreakdown(lev.gross, ccy)}</div>
+      <div>${leverageBreakdown(lev.commitment, ccy)}</div>
+    </div>
+
+    <h3>Principal exposures after look-through</h3>
+    <table><thead><tr><th>#</th><th>Issuer or underlying</th>
+      <th class="num">Exposure</th></tr></thead><tbody>
+      ${a.principal_exposures.map((e, i) =>
+        `<tr><td>${i + 1}</td><td>${esc(e.name)}</td>
+         <td class="num">${money(e.value, ccy)}</td></tr>`).join('')}
+    </tbody></table>
+
+    <h3>Record validation</h3>
+    ${findingsTable(a.findings, 'The assembled Annex IV record satisfies every declared rule.')}
+    <div class="links">
+      <a href="${esc(a.report_url)}">Open the validation report</a>
+      <a href="${esc(a.xml_url)}">View the Annex IV XML</a>
+    </div>
+  </div>`;
+}
+
 function templateSection(t) {
   const block = (p, title, hint) => `
     <h3>${title}</h3>
@@ -381,6 +451,7 @@ function render(data) {
     </div>
     <div id="fund"></div>
     ${ucitsSection(data.ucits)}
+    ${aifmdSection(data.aifmd, data.ucits.currency)}
     ${templateSection(data.templates)}`;
 
   const target = document.getElementById('fund');

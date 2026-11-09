@@ -186,6 +186,15 @@ def _as_number(value: Any) -> float | None:
         return None
 
 
+def _as_date(value: Any) -> date | None:
+    if not _is_present(value):
+        return None
+    try:
+        return date.fromisoformat(str(value).strip())
+    except ValueError:
+        return None
+
+
 def evaluate(condition: Mapping[str, Any] | None, record: Mapping[str, Any]) -> bool:
     """Evaluate a condition against a record. An empty condition is always true."""
 
@@ -240,6 +249,20 @@ def evaluate(condition: Mapping[str, Any] | None, record: Mapping[str, Any]) -> 
             other = _as_number(record.get(condition[operator]))
             return number is not None and other is not None and test(number, other)
 
+    # Date comparisons are separate from the numeric ones because an ISO date
+    # does not survive float(), and a reporting period whose end precedes its
+    # start is exactly the kind of error worth catching.
+    moment = _as_date(value)
+    for operator, test in (
+        ("after_field", lambda a, b: a > b),
+        ("on_or_after_field", lambda a, b: a >= b),
+        ("before_field", lambda a, b: a < b),
+        ("on_or_before_field", lambda a, b: a <= b),
+    ):
+        if operator in condition:
+            other_date = _as_date(record.get(condition[operator]))
+            return moment is not None and other_date is not None and test(moment, other_date)
+
     raise ConditionError(f"unrecognised condition operator in {condition!r}")
 
 
@@ -268,6 +291,10 @@ def describe(condition: Mapping[str, Any] | None) -> str:
         ("matches", "matches"),
         ("gte_field", "is at least the value of"),
         ("lte_field", "is at most the value of"),
+        ("after_field", "falls after"),
+        ("on_or_after_field", "falls on or after"),
+        ("before_field", "falls before"),
+        ("on_or_before_field", "falls on or before"),
     ):
         if operator in condition:
             return f"{name} {phrase} {condition[operator]}"

@@ -1,0 +1,391 @@
+{
+  "template": "ANNEX_IV_AIF",
+  "version": "1.2-illustrative",
+  "title": "AIFMD Annex IV AIF-level report",
+  "key_field": "AIFNationalCode",
+  "description": "Illustrative reconstruction of the AIF-level Annex IV record an AIFM files with its competent authority under Article 24 of Directive 2011/61/EU and Article 110 of Commission Delegated Regulation (EU) 231/2013. Element names follow the structure of the ESMA AIFMD reporting XML, and the semantics follow the Directive, the Delegated Regulation and the ESMA consolidated reporting guidelines (ESMA/2014/869). It is a teaching subset covering identification, strategy, principal exposures and leverage; the authoritative XSD is published by ESMA and must be used for an actual filing.",
+  "fields": [
+    {
+      "code": "FilingType",
+      "name": "Filing type",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["INIT", "AMND", "CANC"],
+      "section": "Filing",
+      "description": "INIT for a first submission, AMND to amend one already accepted, CANC to cancel it."
+    },
+    {
+      "code": "AIFContentType",
+      "name": "Content type",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["1", "2", "3", "4"],
+      "section": "Filing",
+      "reference": "Directive 2011/61/EU Art. 3(3)(d), Art. 24(1), Art. 24(2), Art. 24(4)",
+      "description": "1 sub-threshold Art. 3(3)(d), 2 Art. 24(1), 3 Art. 24(2), 4 Art. 24(4) for AIFs employing leverage on a substantial basis."
+    },
+    {
+      "code": "ReportingMemberState",
+      "name": "Reporting Member State",
+      "datatype": "country",
+      "requirement": "mandatory",
+      "section": "Filing"
+    },
+    {
+      "code": "ReportingPeriodType",
+      "name": "Reporting period",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["Q1", "Q2", "Q3", "Q4", "H1", "H2", "Y1"],
+      "section": "Filing",
+      "reference": "Regulation (EU) 231/2013 Art. 110"
+    },
+    {
+      "code": "ReportingPeriodYear",
+      "name": "Reporting year",
+      "datatype": "integer",
+      "requirement": "mandatory",
+      "minimum": 2013,
+      "maximum": 2100,
+      "section": "Filing"
+    },
+    {
+      "code": "ReportingPeriodStartDate",
+      "name": "Reporting period start",
+      "datatype": "date",
+      "requirement": "mandatory",
+      "section": "Filing"
+    },
+    {
+      "code": "ReportingPeriodEndDate",
+      "name": "Reporting period end",
+      "datatype": "date",
+      "requirement": "mandatory",
+      "section": "Filing"
+    },
+    {
+      "code": "AIFMNationalCode",
+      "name": "AIFM national code",
+      "datatype": "string",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFMIdentifierLEI",
+      "name": "AIFM legal entity identifier",
+      "datatype": "lei",
+      "requirement": "optional",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFNationalCode",
+      "name": "AIF national code",
+      "datatype": "string",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFName",
+      "name": "AIF name",
+      "datatype": "string",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFEEAFlag",
+      "name": "AIF established in the EEA",
+      "datatype": "boolean",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFDomicile",
+      "name": "AIF domicile",
+      "datatype": "country",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFBaseCurrency",
+      "name": "AIF base currency",
+      "datatype": "currency",
+      "requirement": "mandatory",
+      "section": "Identification"
+    },
+    {
+      "code": "InceptionDate",
+      "name": "Inception date",
+      "datatype": "date",
+      "requirement": "optional",
+      "section": "Identification"
+    },
+    {
+      "code": "AIFMasterFeederStatus",
+      "name": "Master or feeder status",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["NONE", "FEEDER", "MASTER"],
+      "section": "Structure"
+    },
+    {
+      "code": "MasterAIFName",
+      "name": "Name of the master AIF",
+      "datatype": "string",
+      "requirement": "conditional",
+      "required_when": { "field": "AIFMasterFeederStatus", "equals": "FEEDER" },
+      "section": "Structure"
+    },
+    {
+      "code": "PredominantAIFType",
+      "name": "Predominant AIF type",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["HF", "PE", "RE", "FOF", "OTHR", "NONE"],
+      "section": "Strategy",
+      "reference": "Regulation (EU) 231/2013 Annex IV",
+      "description": "Hedge fund, private equity, real estate, fund of funds, other, or none."
+    },
+    {
+      "code": "GeographicalFocus",
+      "name": "Geographical focus",
+      "datatype": "enum",
+      "requirement": "mandatory",
+      "values": ["EEA", "EUROPE_NON_EEA", "NORTH_AMERICA", "ASIA_PACIFIC", "GLOBAL", "OTHER"],
+      "section": "Strategy"
+    },
+    {
+      "code": "AIFNetAssetValue",
+      "name": "Net asset value",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "section": "Strategy"
+    },
+    {
+      "code": "AIFAUMAmountInEuro",
+      "name": "Assets under management in euro",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "section": "Strategy",
+      "reference": "Regulation (EU) 231/2013 Arts. 2 to 5"
+    },
+    {
+      "code": "PrincipalExposure1_Name",
+      "name": "Largest exposure, issuer or underlying",
+      "datatype": "string",
+      "requirement": "optional",
+      "section": "Principal exposures"
+    },
+    {
+      "code": "PrincipalExposure1_Value",
+      "name": "Largest exposure, value",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "required_when": { "field": "PrincipalExposure1_Name", "present": true },
+      "section": "Principal exposures"
+    },
+    {
+      "code": "PrincipalExposure2_Name",
+      "name": "Second largest exposure, issuer or underlying",
+      "datatype": "string",
+      "requirement": "optional",
+      "section": "Principal exposures"
+    },
+    {
+      "code": "PrincipalExposure2_Value",
+      "name": "Second largest exposure, value",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "required_when": { "field": "PrincipalExposure2_Name", "present": true },
+      "section": "Principal exposures"
+    },
+    {
+      "code": "PrincipalExposure3_Name",
+      "name": "Third largest exposure, issuer or underlying",
+      "datatype": "string",
+      "requirement": "optional",
+      "section": "Principal exposures"
+    },
+    {
+      "code": "PrincipalExposure3_Value",
+      "name": "Third largest exposure, value",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "required_when": { "field": "PrincipalExposure3_Name", "present": true },
+      "section": "Principal exposures"
+    },
+    {
+      "code": "TopCounterpartyName",
+      "name": "Largest counterparty",
+      "datatype": "string",
+      "requirement": "optional",
+      "section": "Counterparty risk"
+    },
+    {
+      "code": "TopCounterpartyExposure",
+      "name": "Largest counterparty, net exposure",
+      "datatype": "decimal",
+      "requirement": "conditional",
+      "minimum": 0,
+      "required_when": { "field": "TopCounterpartyName", "present": true },
+      "section": "Counterparty risk"
+    },
+    {
+      "code": "LeverageGrossMethodRatio",
+      "name": "Leverage, gross method",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "section": "Leverage",
+      "reference": "Regulation (EU) 231/2013 Art. 7"
+    },
+    {
+      "code": "LeverageCommitmentMethodRatio",
+      "name": "Leverage, commitment method",
+      "datatype": "decimal",
+      "requirement": "mandatory",
+      "minimum": 0,
+      "section": "Leverage",
+      "reference": "Regulation (EU) 231/2013 Art. 8"
+    },
+    {
+      "code": "SubstantialLeverageFlag",
+      "name": "Employs leverage on a substantial basis",
+      "datatype": "boolean",
+      "requirement": "mandatory",
+      "section": "Leverage",
+      "reference": "Regulation (EU) 231/2013 Art. 111(1)"
+    },
+    {
+      "code": "BorrowingTotal",
+      "name": "Total borrowing of cash or securities",
+      "datatype": "decimal",
+      "requirement": "optional",
+      "minimum": 0,
+      "section": "Leverage"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "ANNEXIV.PERIOD.END_AFTER_START",
+      "title": "The reporting period must end after it starts",
+      "reference": "Regulation (EU) 231/2013 Art. 110",
+      "then": {
+        "field": "ReportingPeriodEndDate",
+        "after_field": "ReportingPeriodStartDate"
+      },
+      "message": "The reporting period end date must fall after its start date."
+    },
+    {
+      "rule_id": "ANNEXIV.LEVERAGE.GROSS_AT_LEAST_COMMITMENT",
+      "title": "Gross leverage cannot be below commitment leverage",
+      "reference": "Regulation (EU) 231/2013 Arts. 7 and 8",
+      "when": {
+        "all": [
+          { "field": "LeverageGrossMethodRatio", "present": true },
+          { "field": "LeverageCommitmentMethodRatio", "present": true }
+        ]
+      },
+      "then": {
+        "field": "LeverageGrossMethodRatio",
+        "gte_field": "LeverageCommitmentMethodRatio"
+      },
+      "message": "The gross method allows no netting or hedging, so it can never produce a smaller figure than the commitment method on the same book."
+    },
+    {
+      "rule_id": "ANNEXIV.LEVERAGE.SUBSTANTIAL_FLAG_SET",
+      "title": "Leverage above three times NAV must be flagged as substantial",
+      "reference": "Regulation (EU) 231/2013 Art. 111(1)",
+      "when": { "field": "LeverageCommitmentMethodRatio", "gt": 3 },
+      "then": { "field": "SubstantialLeverageFlag", "in": ["true", "TRUE", "Y", "1"] },
+      "message": "Commitment leverage above three times net asset value means the AIF employs leverage on a substantial basis, which triggers the Art. 24(4) reporting duty."
+    },
+    {
+      "rule_id": "ANNEXIV.LEVERAGE.SUBSTANTIAL_FLAG_NOT_OVERSTATED",
+      "title": "The substantial leverage flag must be supported by the ratio",
+      "reference": "Regulation (EU) 231/2013 Art. 111(1)",
+      "severity": "warning",
+      "when": { "field": "SubstantialLeverageFlag", "in": ["true", "TRUE", "Y", "1"] },
+      "then": { "field": "LeverageCommitmentMethodRatio", "gt": 3 },
+      "message": "The AIF is flagged as substantially leveraged but its commitment ratio is at or below three times net asset value. Either the ratio or the flag is wrong."
+    },
+    {
+      "rule_id": "ANNEXIV.CONTENT.ART24_4_NEEDS_SUBSTANTIAL_LEVERAGE",
+      "title": "An Art. 24(4) filing is for substantially leveraged AIFs",
+      "reference": "Directive 2011/61/EU Art. 24(4)",
+      "when": { "field": "AIFContentType", "equals": "4" },
+      "then": { "field": "SubstantialLeverageFlag", "in": ["true", "TRUE", "Y", "1"] },
+      "message": "Content type 4 is the additional report required of AIFs employing leverage on a substantial basis, so the flag must be set."
+    },
+    {
+      "rule_id": "ANNEXIV.IDENTIFICATION.EEA_FLAG_MATCHES_DOMICILE",
+      "title": "The EEA flag must agree with the domicile",
+      "reference": "Directive 2011/61/EU Art. 4(1)(k)",
+      "when": { "field": "AIFEEAFlag", "in": ["true", "TRUE", "Y", "1"] },
+      "then": {
+        "field": "AIFDomicile",
+        "in": ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR",
+               "HU", "IS", "IE", "IT", "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL",
+               "PT", "RO", "SK", "SI", "ES", "SE"]
+      },
+      "message": "The AIF is flagged as established in the EEA but its domicile is not an EEA state."
+    },
+    {
+      "rule_id": "ANNEXIV.STRATEGY.AUM_AT_LEAST_NAV",
+      "title": "Assets under management should not fall below net asset value",
+      "reference": "Regulation (EU) 231/2013 Arts. 2 to 5",
+      "severity": "warning",
+      "when": {
+        "all": [
+          { "field": "AIFAUMAmountInEuro", "present": true },
+          { "field": "AIFNetAssetValue", "gt": 0 }
+        ]
+      },
+      "then": { "field": "AIFAUMAmountInEuro", "gte_field": "AIFNetAssetValue" },
+      "message": "Assets under management are measured gross of liabilities, so a figure below net asset value usually means the two were computed on different bases."
+    },
+    {
+      "rule_id": "ANNEXIV.EXPOSURE.RANKED_IN_ORDER",
+      "title": "Principal exposures must be reported largest first",
+      "reference": "Regulation (EU) 231/2013 Annex IV",
+      "when": {
+        "all": [
+          { "field": "PrincipalExposure1_Value", "present": true },
+          { "field": "PrincipalExposure2_Value", "present": true }
+        ]
+      },
+      "then": {
+        "field": "PrincipalExposure1_Value",
+        "gte_field": "PrincipalExposure2_Value"
+      },
+      "message": "The principal exposure slots are ranked, so the first must be at least as large as the second."
+    },
+    {
+      "rule_id": "ANNEXIV.EXPOSURE.RANKED_IN_ORDER_2_3",
+      "title": "Principal exposures must be reported largest first",
+      "reference": "Regulation (EU) 231/2013 Annex IV",
+      "when": {
+        "all": [
+          { "field": "PrincipalExposure2_Value", "present": true },
+          { "field": "PrincipalExposure3_Value", "present": true }
+        ]
+      },
+      "then": {
+        "field": "PrincipalExposure2_Value",
+        "gte_field": "PrincipalExposure3_Value"
+      },
+      "message": "The principal exposure slots are ranked, so the second must be at least as large as the third."
+    },
+    {
+      "rule_id": "ANNEXIV.FILING.NAV_POSITIVE",
+      "title": "A reported AIF must have a positive net asset value",
+      "reference": "Regulation (EU) 231/2013 Annex IV",
+      "then": { "field": "AIFNetAssetValue", "gt": 0 },
+      "message": "An AIF reported with a zero or missing net asset value cannot have its leverage ratios interpreted."
+    }
+  ]
+}

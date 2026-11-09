@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-09 22:41 UTC",
+ "generated": "2026-11-09 22:57 UTC",
  "version": "0.1.0",
  "funds": [
   {
@@ -538,6 +538,160 @@
    }
   ]
  },
+ "aifmd": {
+  "aifm": {
+   "name": "Meridian Asset Management S.A.",
+   "national_code": "LU-AIFM-0001",
+   "total_aum": 4200000000
+  },
+  "aif": {
+   "name": "Meridian European Equity Fund",
+   "national_code": "LU-AIF-0001",
+   "domicile": "LU",
+   "predominant_type": "OTHR"
+  },
+  "aum": 132370000.0,
+  "leverage": {
+   "gross": {
+    "method": "gross",
+    "nav": 100000000.0,
+    "exposure": 131500000.0,
+    "ratio": 1.315,
+    "pct_of_nav": 131.5,
+    "substantially_leveraged": false,
+    "components": [
+     {
+      "label": "Physical positions",
+      "amount": 89000000.0,
+      "note": "Absolute market value of non-derivative holdings."
+     },
+     {
+      "label": "Cash borrowing reinvested",
+      "amount": 9500000.0,
+      "note": "Included under Art. 7(d): borrowing that has been put to work adds exposure."
+     },
+     {
+      "label": "Derivative notional, no offsetting",
+      "amount": 33000000.0,
+      "note": "Converted to the equivalent underlying position under Annex I, taken gross."
+     }
+    ],
+    "excluded": [
+     {
+      "label": "Cash and cash equivalents",
+      "amount": 10370000.0,
+      "note": "Excluded under Art. 7(a) and Art. 8(2) of Regulation (EU) 231/2013."
+     }
+    ]
+   },
+   "commitment": {
+    "method": "commitment",
+    "nav": 100000000.0,
+    "exposure": 125500000.0,
+    "ratio": 1.255,
+    "pct_of_nav": 125.5,
+    "substantially_leveraged": false,
+    "components": [
+     {
+      "label": "Physical positions",
+      "amount": 89000000.0,
+      "note": "Absolute market value of non-derivative holdings."
+     },
+     {
+      "label": "Cash borrowing reinvested",
+      "amount": 9500000.0,
+      "note": "Included under Art. 7(d): borrowing that has been put to work adds exposure."
+     },
+     {
+      "label": "Derivative commitment, after netting",
+      "amount": 27000000.0,
+      "note": "Gross 33,000,000 less 6,000,000 offset by netting and hedging arrangements."
+     }
+    ],
+    "excluded": [
+     {
+      "label": "Cash and cash equivalents",
+      "amount": 10370000.0,
+      "note": "Excluded under Art. 7(a) and Art. 8(2) of Regulation (EU) 231/2013."
+     }
+    ]
+   },
+   "ucits_global_exposure_pct": 27.0,
+   "substantially_leveraged": false
+  },
+  "obligation": {
+   "frequency": "quarterly",
+   "reference": "Regulation (EU) 231/2013 Art. 110(3)",
+   "rationale": "The AIFM manages EUR 4,200,000,000, above the EUR 1,000,000,000 quarterly threshold.",
+   "aifm_aum": 4200000000,
+   "aif_aum": 132370000.0,
+   "periods": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4"
+   ]
+  },
+  "principal_exposures": [
+   {
+    "name": "Federal Republic of Germany",
+    "value": 18000000.0
+   },
+   {
+    "name": "Acme Industrial SA",
+    "value": 12500000.0
+   },
+   {
+    "name": "Beta Pharma NV",
+    "value": 8000000.0
+   }
+  ],
+  "counts": {
+   "pass": 7,
+   "warning": 0,
+   "breach": 0,
+   "inconclusive": 0
+  },
+  "valid": true,
+  "record": {
+   "FilingType": "INIT",
+   "AIFContentType": "3",
+   "ReportingMemberState": "LU",
+   "ReportingPeriodType": "Q3",
+   "ReportingPeriodYear": "2026",
+   "ReportingPeriodStartDate": "2026-07-01",
+   "ReportingPeriodEndDate": "2026-09-30",
+   "AIFMNationalCode": "LU-AIFM-0001",
+   "AIFMIdentifierLEI": "5493001KJTIIGC8Y1R12",
+   "AIFNationalCode": "LU-AIF-0001",
+   "AIFName": "Meridian European Equity Fund",
+   "AIFEEAFlag": "true",
+   "AIFDomicile": "LU",
+   "AIFBaseCurrency": "EUR",
+   "InceptionDate": "2016-03-01",
+   "AIFMasterFeederStatus": "NONE",
+   "MasterAIFName": "",
+   "PredominantAIFType": "OTHR",
+   "GeographicalFocus": "EEA",
+   "AIFNetAssetValue": "100000000.00",
+   "AIFAUMAmountInEuro": "132370000.00",
+   "LeverageGrossMethodRatio": "1.3150",
+   "LeverageCommitmentMethodRatio": "1.2550",
+   "SubstantialLeverageFlag": "false",
+   "BorrowingTotal": "9500000.00",
+   "PrincipalExposure1_Name": "Federal Republic of Germany",
+   "PrincipalExposure1_Value": "18000000.00",
+   "PrincipalExposure2_Name": "Acme Industrial SA",
+   "PrincipalExposure2_Value": "12500000.00",
+   "PrincipalExposure3_Name": "Beta Pharma NV",
+   "PrincipalExposure3_Value": "8000000.00",
+   "TopCounterpartyName": "BNP",
+   "TopCounterpartyExposure": "280000.00"
+  },
+  "report_url": "reports/aifmd.html",
+  "xml_url": "reports/annex_iv.xml",
+  "findings": []
+ },
  "templates": {
   "eet": {
    "template": "EET",
@@ -568,9 +722,9 @@
       "expected": "21010_Preference_A_Taxonomy_Share is empty or 21010_Preference_A_Taxonomy_Share is at most 0 and 21020_Preference_B_SFDR_Share is empty or 21020_Preference_B_SFDR_Share is at most 0",
       "applies_when": "20010_SFDR_Product_Type is ARTICLE_6",
       "values": {
-       "21020_Preference_B_SFDR_Share": "10.0",
+       "21010_Preference_A_Taxonomy_Share": "0.0",
        "20010_SFDR_Product_Type": "ARTICLE_6",
-       "21010_Preference_A_Taxonomy_Share": "0.0"
+       "21020_Preference_B_SFDR_Share": "10.0"
       }
      },
      "headroom": null
@@ -649,8 +803,8 @@
       "expected": "22900_PAI_Coverage_Ratio is at least 50",
       "applies_when": "20060_PAI_Considered is Y",
       "values": {
-       "22900_PAI_Coverage_Ratio": "46.0",
-       "20060_PAI_Considered": "Y"
+       "20060_PAI_Considered": "Y",
+       "22900_PAI_Coverage_Ratio": "46.0"
       }
      },
      "headroom": null
@@ -707,8 +861,8 @@
       "applies_when": "09060_Total_Cost_Ratio is populated and 09030_Ongoing_Cost is populated and 09040_Transaction_Cost is populated",
       "values": {
        "09040_Transaction_Cost": "0.26",
-       "09060_Total_Cost_Ratio": "1.30",
-       "09030_Ongoing_Cost": "1.40"
+       "09030_Ongoing_Cost": "1.40",
+       "09060_Total_Cost_Ratio": "1.30"
       }
      },
      "headroom": null
@@ -727,10 +881,10 @@
       "expected": "07010_Distribution_Execution_Only is Y or 07020_Distribution_Appropriateness is Y or 07030_Distribution_Investment_Advice is Y or 07040_Distribution_Portfolio_Management is Y",
       "applies_when": "always",
       "values": {
-       "07010_Distribution_Execution_Only": "N",
-       "07030_Distribution_Investment_Advice": "N",
        "07040_Distribution_Portfolio_Management": "N",
-       "07020_Distribution_Appropriateness": "N"
+       "07010_Distribution_Execution_Only": "N",
+       "07020_Distribution_Appropriateness": "N",
+       "07030_Distribution_Investment_Advice": "N"
       }
      },
      "headroom": null
@@ -769,8 +923,8 @@
       "expected": "05020_Risk_Tolerance_Methodology is PRIIPS_SRI",
       "applies_when": "02010_Investor_Type_Retail is Y",
       "values": {
-       "05020_Risk_Tolerance_Methodology": "UCITS_SRRI",
-       "02010_Investor_Type_Retail": "Y"
+       "02010_Investor_Type_Retail": "Y",
+       "05020_Risk_Tolerance_Methodology": "UCITS_SRRI"
       }
      },
      "headroom": null

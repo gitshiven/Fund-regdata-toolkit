@@ -2,10 +2,11 @@
 
 A working implementation of the calculations that sit behind European fund
 regulation: **UCITS** investment limits, the **PRIIPs** Key Information
-Document, and validation of the **EET** and **EMT** files that carry **SFDR**
-and **MiFID II** data from a manufacturer to its distributors.
+Document, **AIFMD** Annex IV leverage and reporting, and validation of the
+**EET** and **EMT** files that carry **SFDR** and **MiFID II** data from a
+manufacturer to its distributors.
 
-Pure Python, no dependencies, 137 tests. A live dashboard runs every engine over
+Pure Python, no dependencies, 191 tests. A live dashboard runs every engine over
 a sample fund range.
 
 **[Open the dashboard](https://gitshiven.github.io/Fund-regdata-toolkit/)**
@@ -73,6 +74,40 @@ Three things the engine gets right that a naive implementation usually does not:
   holding period, split by cost category, with the parts reconciling to the
   total.
 - **A rendered KID** as a self-contained HTML page.
+
+### AIFMD Annex IV — Directive 2011/61/EU and (EU) 231/2013
+
+- **Leverage both ways.** The gross method of Art. 7, which allows no netting
+  at all, and the commitment method of Art. 8, which allows the same offsetting
+  a UCITS gets. Both exclude cash and cash equivalents and both pick up
+  reinvested borrowing, with every component itemised.
+- **The Art. 111 threshold.** Commitment leverage above three times NAV makes an
+  AIF "substantially leveraged", which decides whether the Art. 24(4) report is
+  due. The content type on the record follows the computed ratio rather than
+  being typed in.
+- **Reporting frequency under Art. 110.** The thresholds interact: a mid-sized
+  AIFM files half-yearly for most funds but quarterly for any single AIF above
+  EUR 500 million, and a sub-threshold AIFM registered under Art. 3(2) files
+  annually whatever it holds.
+- **Assets under management on the Art. 2 basis**, which is not the net asset
+  value — the sample fund has a NAV of EUR 100m and AuM of EUR 132m.
+- **An Annex IV record and its XML.** The record is a flat mapping of element
+  names validated by the same engine as the EET and EMT before it is serialised,
+  so a field problem surfaces as a finding rather than as malformed XML.
+
+The measurement bases are the point. A UCITS global exposure of 27% and an
+AIFMD commitment ratio of 1.26x describe the *same book*:
+
+| | UCITS, commitment approach | AIFMD, commitment method |
+|---|---|---|
+| What is measured | Incremental exposure from derivatives | Exposure of the whole portfolio |
+| Cash and cash equivalents | Not relevant, derivatives only | Excluded explicitly |
+| Borrowing | Separate 10% limit under Art. 83 | Included where reinvested |
+| Expressed as | % of NAV, capped at 100% | Ratio to NAV, no hard cap |
+| Unleveraged reads as | 0% | 1.0 |
+
+Quoting one of these figures where the other is meant is a common reporting
+error, so the toolkit computes both and prints them side by side.
 
 ### EET and EMT validation — SFDR, EU Taxonomy and MiFID II
 
@@ -158,6 +193,27 @@ fundreg eet data/sample_eet.csv --html out/eet.html
 fundreg reconcile data/sample_eet.csv data/sample_emt.csv
 ```
 
+```bash
+fundreg aifmd data/sample_portfolio.csv --aifm-aum 4.2e9 --xml out/annexiv.xml
+```
+
+```
+AIFMD Annex IV: Meridian European Equity Fund
+  NAV 100,000,000 EUR   assets under management 132,370,000
+  Reporting quarterly, period Q3 2026  (Regulation (EU) 231/2013 Art. 110(3))
+
+  Leverage
+    gross        1.3150x   exposure    131,500,000
+        + Physical positions                         89,000,000
+        + Cash borrowing reinvested                   9,500,000
+        + Derivative notional, no offsetting         33,000,000
+        - Cash and cash equivalents                  10,370,000
+    commitment   1.2550x   exposure    125,500,000
+        + Derivative commitment, after netting       27,000,000
+    UCITS global exposure for comparison: 27.00% of NAV (derivatives only, a different measure)
+    Substantially leveraged (Art. 111): no; filing as content type 3
+```
+
 Exit codes follow the convention a pipeline expects: `0` clean, `1` something
 breached, `2` a usage or input error. Every command takes `--html`, `--json` and
 `--all` (which shows passing rules too).
@@ -199,6 +255,11 @@ src/fundreg/
   ucits/
     limits.py          The limit suite
     exposure.py        Commitment approach and counterparty exposure
+  aifmd/
+    leverage.py        Gross and commitment methods, Art. 111 threshold
+    frequency.py       Art. 110 reporting frequency and period maths
+    report.py          Annex IV record assembly and validation
+    xml.py             ESMA-style Annex IV XML
   priips/
     sri.py             Market and credit risk measures, the SRI matrix
     scenarios.py       Both performance-scenario methodologies
@@ -208,11 +269,11 @@ src/fundreg/
     spec.py            Spec model, condition language, value checking
     validator.py       Four validation layers
     report.py          HTML findings report
-    specs/*.json       Bundled EET and EMT definitions
+    specs/*.json       Bundled EET, EMT and Annex IV definitions
 data/                  Sample portfolio, return histories, EET and EMT files
 scripts/               Sample data generator and the site builder
 docs/                  The published dashboard
-tests/                 137 unit tests
+tests/                 191 unit tests
 ```
 
 ## Develop
@@ -239,11 +300,16 @@ test rather than a silently different dashboard.
 
 This is a demonstration of methodology, not a filing system.
 
-- **The EET and EMT specs are an illustrative reconstruction.** Field codes
-  follow the numbering convention and the semantics follow the underlying
-  regulations, but the authoritative field catalogue is published by
-  [FinDatEx](https://findatex.eu/) and should be used for production reporting.
-  Swap in a different JSON spec and the engine works unchanged.
+- **The EET, EMT and Annex IV specs are illustrative reconstructions.** Field
+  codes follow the numbering and element conventions and the semantics follow
+  the underlying regulations, but the authoritative catalogues are published by
+  [FinDatEx](https://findatex.eu/) and, for Annex IV, by ESMA as an XSD. Use
+  those for production reporting. Swap in a different JSON spec and the engine
+  works unchanged.
+- **The Annex IV record is a subset.** Identification, strategy, principal
+  exposures, counterparty and leverage are implemented. The liquidity profile,
+  the risk measures of Art. 24(2), stress-test results and the AIFM-level
+  report are not; they need data a portfolio file does not carry.
 - **PRIIPs Category 1 and 3 products are not implemented.** The SRI here covers
   Category 2, which is where most funds sit. Structured products and those with
   unusual payoffs need the Monte Carlo and bootstrapping routes of Annex II.
@@ -255,8 +321,6 @@ This is a demonstration of methodology, not a filing system.
   contains no bad seven year window, the "unfavourable" scenario is a gain. That
   is a real property of the 2021 methodology, and a reason the KID carries the
   sentence about past results.
-- **AIFMD Annex IV reporting is not here yet.** The portfolio model was built
-  with it in mind; it is the obvious next module.
 - **Nothing here is legal or investment advice.** Verify against the current
   consolidated text before relying on any of it.
 
@@ -264,6 +328,8 @@ This is a demonstration of methodology, not a filing system.
 
 - Directive 2009/65/EC (UCITS), Arts. 50–57 and 83
 - CESR/10-788 — global exposure and counterparty risk for UCITS
+- Directive 2011/61/EU (AIFMD), Arts. 3, 4(1)(v) and 24
+- Commission Delegated Regulation (EU) 231/2013, Arts. 2–8, 110, 111 and Annexes I–IV
 - Commission Delegated Regulation (EU) 2017/653 (PRIIPs RTS), Annexes I, II, IV and VI
 - Commission Delegated Regulation (EU) 2021/2268 amending the PRIIPs RTS
 - Regulation (EU) 2019/2088 (SFDR) and Delegated Regulation (EU) 2022/1288

@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from fundreg import __version__, load_portfolio, load_returns  # noqa: E402
+from fundreg.aifmd import AifInfo, AifmInfo, build_report, write_xml  # noqa: E402
 from fundreg.priips import (  # noqa: E402
     CostStructure,
     ProductInfo,
@@ -175,6 +176,57 @@ def build_ucits() -> dict:
     }
 
 
+def build_aifmd() -> dict:
+    """Run the sample portfolio through the Annex IV pipeline as if it were an AIF."""
+
+    portfolio = load_portfolio(DATA / "sample_portfolio.csv")
+    report = build_report(
+        portfolio,
+        AifmInfo(
+            name="Meridian Asset Management S.A.",
+            national_code="LU-AIFM-0001",
+            reporting_member_state="LU",
+            lei="5493001KJTIIGC8Y1R12",
+            total_aum=4_200_000_000,
+        ),
+        AifInfo(
+            name="Meridian European Equity Fund",
+            national_code="LU-AIF-0001",
+            domicile="LU",
+            inception_date="2016-03-01",
+            predominant_type="OTHR",
+            geographical_focus="EEA",
+        ),
+    )
+
+    write_xml(report, DOCS / "reports" / "annex_iv.xml", created="2026-09-30T23:59:59")
+    write_findings_html(
+        report.findings,
+        DOCS / "reports" / "aifmd.html",
+        title="AIFMD Annex IV validation: Meridian European Equity Fund",
+        subtitle=(
+            f"Gross {report.leverage.gross.ratio:.4f}x, "
+            f"commitment {report.leverage.commitment.ratio:.4f}x, "
+            f"{report.obligation.frequency.value} reporting"
+        ),
+    )
+    print(
+        f"  AIFMD: gross {report.leverage.gross.ratio:.4f}x, "
+        f"commitment {report.leverage.commitment.ratio:.4f}x, "
+        f"{report.findings.summary_line()}"
+    )
+
+    payload = report.to_dict()
+    payload["report_url"] = "reports/aifmd.html"
+    payload["xml_url"] = "reports/annex_iv.xml"
+    payload["findings"] = [
+        f.to_dict()
+        for f in report.findings.sorted_by_severity()
+        if f.severity.value in {"breach", "warning"}
+    ]
+    return payload
+
+
 def build_templates() -> dict:
     eet_spec, emt_spec = load_eet_spec(), load_emt_spec()
     eet = validate_file(DATA / "sample_eet.csv", eet_spec)
@@ -246,6 +298,7 @@ def main() -> None:
         "version": __version__,
         "funds": build_kids(),
         "ucits": build_ucits(),
+        "aifmd": build_aifmd(),
         "templates": build_templates(),
     }
 

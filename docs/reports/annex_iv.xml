@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AIFMReportingInfo CreationDateAndTime="2026-09-30T23:59:59" Version="1.2" ReportingMemberState="LU">
+  <AIFRecordInfo>
+    <FilingType>INIT</FilingType>
+    <AIFContentType>3</AIFContentType>
+    <ReportingPeriodType>Q3</ReportingPeriodType>
+    <ReportingPeriodYear>2026</ReportingPeriodYear>
+    <ReportingPeriodStartDate>2026-07-01</ReportingPeriodStartDate>
+    <ReportingPeriodEndDate>2026-09-30</ReportingPeriodEndDate>
+    <AIFMNationalCode>LU-AIFM-0001</AIFMNationalCode>
+    <AIFMIdentifierLEI>5493001KJTIIGC8Y1R12</AIFMIdentifierLEI>
+    <AIFNationalCode>LU-AIF-0001</AIFNationalCode>
+    <AIFName>Meridian European Equity Fund</AIFName>
+    <AIFEEAFlag>true</AIFEEAFlag>
+    <AIFDomicile>LU</AIFDomicile>
+    <AIFBaseCurrency>EUR</AIFBaseCurrency>
+    <InceptionDate>2016-03-01</InceptionDate>
+    <AIFMasterFeederStatus>NONE</AIFMasterFeederStatus>
+    <PredominantAIFType>OTHR</PredominantAIFType>
+    <GeographicalFocus>EEA</GeographicalFocus>
+    <AIFNetAssetValue>100000000.00</AIFNetAssetValue>
+    <AIFAUMAmountInEuro>132370000.00</AIFAUMAmountInEuro>
+    <PrincipalExposure1_Name>Federal Republic of Germany</PrincipalExposure1_Name>
+    <PrincipalExposure1_Value>18000000.00</PrincipalExposure1_Value>
+    <PrincipalExposure2_Name>Acme Industrial SA</PrincipalExposure2_Name>
+    <PrincipalExposure2_Value>12500000.00</PrincipalExposure2_Value>
+    <PrincipalExposure3_Name>Beta Pharma NV</PrincipalExposure3_Name>
+    <PrincipalExposure3_Value>8000000.00</PrincipalExposure3_Value>
+    <TopCounterpartyName>BNP</TopCounterpartyName>
+    <TopCounterpartyExposure>280000.00</TopCounterpartyExposure>
+    <LeverageGrossMethodRatio>1.3150</LeverageGrossMethodRatio>
+    <LeverageCommitmentMethodRatio>1.2550</LeverageCommitmentMethodRatio>
+    <SubstantialLeverageFlag>false</SubstantialLeverageFlag>
+    <BorrowingTotal>9500000.00</BorrowingTotal>
+  </AIFRecordInfo>
+</AIFMReportingInfo>

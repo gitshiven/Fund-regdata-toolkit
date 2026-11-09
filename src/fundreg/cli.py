@@ -7,6 +7,7 @@
     fundreg eet     data/sample_eet.csv --html out/eet.html
     fundreg emt     data/sample_emt.csv
     fundreg reconcile data/sample_eet.csv data/sample_emt.csv
+    fundreg aifmd   data/sample_portfolio.csv --aifm-aum 4.2e9 --xml out/annexiv.xml
 
 Exit codes follow the convention a CI pipeline expects: ``0`` when nothing is
 breached, ``1`` when something is, ``2`` on a usage or input error.
@@ -20,6 +21,7 @@ import sys
 from pathlib import Path
 
 from fundreg import __version__
+from fundreg.aifmd import AifInfo, AifmInfo, build_report, report_to_xml
 from fundreg.findings import FindingSet, Severity
 from fundreg.models import load_portfolio, load_returns
 from fundreg.priips import CostStructure, ProductInfo, build_kid, write_html
@@ -216,6 +218,93 @@ def cmd_reconcile(args: argparse.Namespace) -> int:
     )
 
 
+def cmd_aifmd(args: argparse.Namespace) -> int:
+    portfolio = load_portfolio(args.portfolio)
+    report = build_report(
+        portfolio,
+        AifmInfo(
+            name=args.aifm_name,
+            national_code=args.aifm_code,
+            reporting_member_state=args.member_state,
+            lei=args.aifm_lei,
+            total_aum=args.aifm_aum,
+            is_authorised=not args.sub_threshold,
+        ),
+        AifInfo(
+            name=args.aif_name or portfolio.fund_name,
+            national_code=args.aif_code,
+            domicile=args.domicile,
+            predominant_type=args.aif_type,
+            geographical_focus=args.focus,
+            master_feeder_status=args.master_feeder,
+            master_aif_name=args.master_name,
+            inception_date=args.inception,
+        ),
+        filing_type=args.filing_type,
+    )
+
+    gross, commitment = report.leverage.gross, report.leverage.commitment
+    print(f"\nAIFMD Annex IV: {report.aif.name}")
+    print(
+        f"  NAV {portfolio.nav:,.0f} {portfolio.base_currency}"
+        f"   assets under management {report.aum:,.0f}"
+    )
+    print(
+        f"  Reporting {report.obligation.frequency.value}, period "
+        f"{report.record['ReportingPeriodType']} {report.record['ReportingPeriodYear']}"
+        f"  ({report.obligation.reference})"
+    )
+    print(f"  {report.obligation.rationale}\n")
+
+    print("  Leverage")
+    for result in (gross, commitment):
+        print(f"    {result.method:<11} {result.ratio:>7.4f}x   exposure {result.exposure:>14,.0f}")
+        for component in result.components:
+            print(f"        + {component.label:<38} {component.amount:>14,.0f}")
+        for component in result.excluded:
+            print(f"        - {component.label:<38} {component.amount:>14,.0f}")
+    if report.leverage.ucits_global_exposure_pct is not None:
+        print(
+            f"    UCITS global exposure for comparison: "
+            f"{report.leverage.ucits_global_exposure_pct:.2f}% of NAV "
+            f"(derivatives only, a different measure)"
+        )
+    print(
+        f"    Substantially leveraged (Art. 111): "
+        f"{'yes' if report.substantially_leveraged else 'no'};"
+        f" filing as content type {report.record['AIFContentType']}\n"
+    )
+
+    print("  Principal exposures after look-through")
+    for index, (name, value) in enumerate(report.principal_exposures, start=1):
+        print(f"    {index}. {name:<38} {value:>14,.0f}  {portfolio.pct(value):>6.2f}% of NAV")
+    print()
+
+    _print_findings(report.findings, show_passes=args.all)
+
+    if args.xml:
+        Path(args.xml).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.xml).write_text(report_to_xml(report), encoding="utf-8")
+        print(f"  Annex IV XML written to {args.xml}")
+    if args.json:
+        Path(args.json).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.json).write_text(json.dumps(report.to_dict(), indent=2), encoding="utf-8")
+        print(f"  JSON written to {args.json}")
+    if args.html:
+        path = write_findings_html(
+            report.findings,
+            args.html,
+            title=f"AIFMD Annex IV validation: {report.aif.name}",
+            subtitle=(
+                f"Gross {gross.ratio:.4f}x, commitment {commitment.ratio:.4f}x, "
+                f"{report.obligation.frequency.value} reporting"
+            ),
+        )
+        print(f"  Report written to {path}")
+
+    return EXIT_BREACH if report.findings.breaches else EXIT_OK
+
+
 # --------------------------------------------------------------------------- #
 # Argument parsing
 # --------------------------------------------------------------------------- #
@@ -310,6 +399,60 @@ def build_parser() -> argparse.ArgumentParser:
     rec.add_argument("emt", help="EMT file")
     _add_output_options(rec)
     rec.set_defaults(func=cmd_reconcile)
+
+    aifmd = sub.add_parser("aifmd", help="build an AIFMD Annex IV AIF report")
+    aifmd.add_argument("portfolio", help="portfolio CSV")
+    aifmd.add_argument(
+        "--aifm-aum",
+        type=float,
+        default=0.0,
+        dest="aifm_aum",
+        help="total assets under management of the AIFM in euro, which drives the "
+        "Art. 110 reporting frequency",
+    )
+    aifmd.add_argument("--aifm-name", default="Sample Management Company", dest="aifm_name")
+    aifmd.add_argument("--aifm-code", default="AIFM-0001", dest="aifm_code")
+    aifmd.add_argument("--aifm-lei", default="", dest="aifm_lei")
+    aifmd.add_argument("--aif-name", default="", dest="aif_name")
+    aifmd.add_argument("--aif-code", default="AIF-0001", dest="aif_code")
+    aifmd.add_argument("--member-state", default="LU", dest="member_state")
+    aifmd.add_argument("--domicile", default="LU")
+    aifmd.add_argument("--inception", default="", help="inception date, YYYY-MM-DD")
+    aifmd.add_argument(
+        "--aif-type",
+        default="OTHR",
+        dest="aif_type",
+        choices=("HF", "PE", "RE", "FOF", "OTHR", "NONE"),
+        help="predominant AIF type",
+    )
+    aifmd.add_argument(
+        "--focus",
+        default="EEA",
+        choices=("EEA", "EUROPE_NON_EEA", "NORTH_AMERICA", "ASIA_PACIFIC", "GLOBAL", "OTHER"),
+        help="geographical focus",
+    )
+    aifmd.add_argument(
+        "--master-feeder",
+        default="NONE",
+        dest="master_feeder",
+        choices=("NONE", "FEEDER", "MASTER"),
+    )
+    aifmd.add_argument("--master-name", default="", dest="master_name")
+    aifmd.add_argument(
+        "--filing-type",
+        default="INIT",
+        dest="filing_type",
+        choices=("INIT", "AMND", "CANC"),
+    )
+    aifmd.add_argument(
+        "--sub-threshold",
+        action="store_true",
+        dest="sub_threshold",
+        help="the AIFM is registered under Art. 3(2) rather than authorised",
+    )
+    aifmd.add_argument("--xml", metavar="PATH", help="write the Annex IV XML")
+    _add_output_options(aifmd)
+    aifmd.set_defaults(func=cmd_aifmd)
 
     return parser
 

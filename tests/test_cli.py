@@ -69,6 +69,48 @@ class TestExitCodes(unittest.TestCase):
         self.assertIn("Performance scenarios", output)
 
 
+class TestAifmdCommand(unittest.TestCase):
+    def test_reports_both_leverage_methods_and_the_frequency(self) -> None:
+        code, output = run(["aifmd", PORTFOLIO, "--aifm-aum", "4.2e9"])
+        self.assertEqual(code, EXIT_OK)
+        self.assertIn("gross        1.3150x", output)
+        self.assertIn("commitment   1.2550x", output)
+        self.assertIn("Reporting quarterly, period Q3 2026", output)
+        self.assertIn("Substantially leveraged (Art. 111): no", output)
+
+    def test_frequency_follows_the_aifm_size(self) -> None:
+        _, half = run(["aifmd", PORTFOLIO, "--aifm-aum", "4e8"])
+        self.assertIn("Reporting half-yearly", half)
+        _, annual = run(["aifmd", PORTFOLIO, "--aifm-aum", "4e9", "--sub-threshold"])
+        self.assertIn("Reporting annual", annual)
+
+    def test_writes_annex_iv_xml(self) -> None:
+        from xml.etree import ElementTree
+
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / "nested" / "annexiv.xml"
+            run(
+                [
+                    "aifmd",
+                    PORTFOLIO,
+                    "--aifm-aum",
+                    "4.2e9",
+                    "--aif-code",
+                    "LU-AIF-1",
+                    "--xml",
+                    str(target),
+                ]
+            )
+            root = ElementTree.fromstring(target.read_text(encoding="utf-8"))
+            self.assertEqual(root.tag, "AIFMReportingInfo")
+            self.assertEqual(root.find("AIFRecordInfo").findtext("AIFNationalCode"), "LU-AIF-1")
+
+    def test_an_invalid_domicile_combination_exits_one(self) -> None:
+        code, output = run(["aifmd", PORTFOLIO, "--aifm-aum", "4.2e9", "--domicile", "KY"])
+        self.assertEqual(code, EXIT_BREACH)
+        self.assertIn("EEA_FLAG_MATCHES_DOMICILE", output)
+
+
 class TestOutputFiles(unittest.TestCase):
     def test_ucits_writes_html_and_json(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

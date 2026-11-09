@@ -316,7 +316,14 @@ def _fields_in(condition: Mapping[str, Any] | None) -> set[str]:
         return _fields_in(condition["not"])
     if "field" in condition:
         out.add(condition["field"])
-    for operator in ("gte_field", "lte_field"):
+    for operator in (
+        "gte_field",
+        "lte_field",
+        "after_field",
+        "on_or_after_field",
+        "before_field",
+        "on_or_before_field",
+    ):
         if operator in condition:
             out.add(condition[operator])
     return out
