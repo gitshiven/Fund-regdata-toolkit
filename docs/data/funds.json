@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-09 22:31 UTC",
+ "generated": "2026-11-09 22:41 UTC",
  "version": "0.1.0",
  "funds": [
   {
@@ -568,9 +568,9 @@
       "expected": "21010_Preference_A_Taxonomy_Share is empty or 21010_Preference_A_Taxonomy_Share is at most 0 and 21020_Preference_B_SFDR_Share is empty or 21020_Preference_B_SFDR_Share is at most 0",
       "applies_when": "20010_SFDR_Product_Type is ARTICLE_6",
       "values": {
+       "21020_Preference_B_SFDR_Share": "10.0",
        "20010_SFDR_Product_Type": "ARTICLE_6",
-       "21010_Preference_A_Taxonomy_Share": "0.0",
-       "21020_Preference_B_SFDR_Share": "10.0"
+       "21010_Preference_A_Taxonomy_Share": "0.0"
       }
      },
      "headroom": null
@@ -589,8 +589,8 @@
       "expected": "21030_Preference_C_PAI is N",
       "applies_when": "20060_PAI_Considered is N",
       "values": {
-       "20060_PAI_Considered": "N",
-       "21030_Preference_C_PAI": "Y"
+       "21030_Preference_C_PAI": "Y",
+       "20060_PAI_Considered": "N"
       }
      },
      "headroom": null
@@ -649,8 +649,8 @@
       "expected": "22900_PAI_Coverage_Ratio is at least 50",
       "applies_when": "20060_PAI_Considered is Y",
       "values": {
-       "20060_PAI_Considered": "Y",
-       "22900_PAI_Coverage_Ratio": "46.0"
+       "22900_PAI_Coverage_Ratio": "46.0",
+       "20060_PAI_Considered": "Y"
       }
      },
      "headroom": null
@@ -706,9 +706,9 @@
       "expected": "09060_Total_Cost_Ratio is at least the value of 09030_Ongoing_Cost",
       "applies_when": "09060_Total_Cost_Ratio is populated and 09030_Ongoing_Cost is populated and 09040_Transaction_Cost is populated",
       "values": {
+       "09040_Transaction_Cost": "0.26",
        "09060_Total_Cost_Ratio": "1.30",
-       "09030_Ongoing_Cost": "1.40",
-       "09040_Transaction_Cost": "0.26"
+       "09030_Ongoing_Cost": "1.40"
       }
      },
      "headroom": null
@@ -727,9 +727,9 @@
       "expected": "07010_Distribution_Execution_Only is Y or 07020_Distribution_Appropriateness is Y or 07030_Distribution_Investment_Advice is Y or 07040_Distribution_Portfolio_Management is Y",
       "applies_when": "always",
       "values": {
-       "07040_Distribution_Portfolio_Management": "N",
-       "07030_Distribution_Investment_Advice": "N",
        "07010_Distribution_Execution_Only": "N",
+       "07030_Distribution_Investment_Advice": "N",
+       "07040_Distribution_Portfolio_Management": "N",
        "07020_Distribution_Appropriateness": "N"
       }
      },
@@ -749,8 +749,8 @@
       "expected": "04040_Loss_Bearing_Beyond_Capital is N",
       "applies_when": "04010_Loss_Bearing_No_Capital_Loss is Y",
       "values": {
-       "04040_Loss_Bearing_Beyond_Capital": "Y",
-       "04010_Loss_Bearing_No_Capital_Loss": "Y"
+       "04010_Loss_Bearing_No_Capital_Loss": "Y",
+       "04040_Loss_Bearing_Beyond_Capital": "Y"
       }
      },
      "headroom": null
@@ -789,8 +789,8 @@
       "expected": "03010_Knowledge_Basic is Y",
       "applies_when": "07010_Distribution_Execution_Only is Y",
       "values": {
-       "03010_Knowledge_Basic": "N",
-       "07010_Distribution_Execution_Only": "Y"
+       "07010_Distribution_Execution_Only": "Y",
+       "03010_Knowledge_Basic": "N"
       }
      },
      "headroom": null
@@ -809,8 +809,8 @@
       "expected": "06010_Objective_Preservation is N",
       "applies_when": "05010_Risk_Tolerance_Indicator is at least 5",
       "values": {
-       "06010_Objective_Preservation": "Y",
-       "05010_Risk_Tolerance_Indicator": "6"
+       "05010_Risk_Tolerance_Indicator": "6",
+       "06010_Objective_Preservation": "Y"
       }
      },
      "headroom": null

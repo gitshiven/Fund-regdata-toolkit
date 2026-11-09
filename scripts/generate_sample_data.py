@@ -30,6 +30,11 @@ sys.path.insert(0, str(ROOT / "src"))
 DAYS_PER_YEAR = 256
 YEARS = 10
 
+#: Written explicitly rather than left to the csv module, whose default is
+#: CRLF. The committed sample data must be byte-identical whether it was
+#: regenerated on Windows or on the Linux runner in CI.
+LINE_TERMINATOR = "\n"
+
 
 def isin_check_digit(body: str) -> str:
     """Compute the ISO 6166 check digit for an eleven-character ISIN body."""
@@ -137,7 +142,7 @@ def write_returns(directory: Path) -> None:
         rows = simulate_returns(fund, seed=fund["seed"])
         path = directory / f"{fund['key']}.csv"
         with path.open("w", newline="", encoding="utf-8") as fh:
-            writer = csv.writer(fh)
+            writer = csv.writer(fh, lineterminator=LINE_TERMINATOR)
             writer.writerow(["return"])
             writer.writerows([f"{r:.8f}"] for r in rows)
         print(f"wrote {len(rows):,} returns to {path.relative_to(ROOT)}")
@@ -439,7 +444,7 @@ def emt_rows() -> list[dict[str, str]]:
 def write_csv(path: Path, columns: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=columns)
+        writer = csv.DictWriter(fh, fieldnames=columns, lineterminator=LINE_TERMINATOR)
         writer.writeheader()
         writer.writerows(rows)
     print(f"wrote {len(rows)} rows to {path.relative_to(ROOT)}")

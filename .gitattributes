@@ -1,0 +1,17 @@
+# Normalise every text file to LF in the repository and in the working tree, on
+# every platform. Without this the sample data regenerated on Windows differs
+# from the same data regenerated on Linux by its line endings alone, which makes
+# the reproducibility check in CI fail for no real reason.
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.json  text eol=lf
+*.csv   text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
+*.toml  text eol=lf
+*.html  text eol=lf
+
+*.png   binary
+*.jpg   binary
+*.pdf   binary
