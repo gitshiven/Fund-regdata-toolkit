@@ -29,8 +29,9 @@ dev = ["ruff>=0.6"]
 fundreg = "fundreg.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/"
-Documentation = "https://github.com/"
+Homepage = "https://github.com/gitshiven/Fund-regdata-toolkit"
+Documentation = "https://gitshiven.github.io/Fund-regdata-toolkit/"
+Issues = "https://github.com/gitshiven/Fund-regdata-toolkit/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

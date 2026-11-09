@@ -8,7 +8,7 @@ and **MiFID II** data from a manufacturer to its distributors.
 Pure Python, no dependencies, 137 tests. A live dashboard runs every engine over
 a sample fund range.
 
-**[Open the dashboard](https://github.com/)** · *(set this link once GitHub Pages is enabled)*
+**[Open the dashboard](https://gitshiven.github.io/Fund-regdata-toolkit/)**
 
 ---
 
@@ -114,11 +114,11 @@ Specs are **JSON, not code**, so a new template version is a data change:
 Python 3.10 or later. Nothing else.
 
 ```bash
-git clone https://github.com/<you>/fund-regdata-toolkit.git
+git clone https://github.com/gitshiven/Fund-regdata-toolkit.git
 ```
 
 ```bash
-cd fund-regdata-toolkit && pip install -e .
+cd Fund-regdata-toolkit && pip install -e .
 ```
 
 ## Use it from the command line
